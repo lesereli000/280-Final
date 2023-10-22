@@ -42,7 +42,7 @@ hr {
     margin: 5px;
 }
 
-.accordion-button {
+h1 > .accordion-button {
     text-align: center;
     font-size: x-large;
     background-color: #f9f8f5;
