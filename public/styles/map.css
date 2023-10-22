@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 #sideMenu {
     margin: 0;
     margin-left: 50px;
@@ -17,8 +21,7 @@
     height: 50px;
     background-color: #f9f8f5;
     position: absolute;
-    margin-top: 40px;
-    transform: translateX(75%);
+    transform: translate(75%, -95vh);
 }
 
 #locationLabel {
@@ -26,6 +29,13 @@
     margin-bottom: 0px;
     margin-top: 10px;
     color: gray;
+}
+
+/* This is just a placeholder for map styling */
+#map {
+    width: 100vw;
+    height: 100vh;
+    background-color: blanchedalmond;
 }
 
 hr {
@@ -47,3 +57,5 @@ hr {
 }
 /* TODO: selected accordion dropdown has different background 
     color ( should be #f9f8f5 ) */
+
+/* TODO: mobile styling ( anything smaller than roughly 700px ) */
