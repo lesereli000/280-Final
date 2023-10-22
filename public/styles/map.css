@@ -1,12 +1,49 @@
-.page-container{
-    margin-top: 30vh;
-}
-
-.card {
+#sideMenu {
+    margin: 0;
+    margin-left: 50px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     width: 15em;
     border: 2px solid #246bce;
-    margin-left: 50px;
     background-color: #f9f8f5;
     text-align: center;
-    padding: 5px;
 }
+
+#search{
+    width: 50vw;
+    border: 2px solid #246bce;
+    height: 50px;
+    background-color: #f9f8f5;
+    position: absolute;
+    margin-top: 40px;
+    transform: translateX(75%);
+}
+
+#locationLabel {
+    font-size: 85%;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    color: gray;
+}
+
+hr {
+    margin: 5px;
+}
+
+.accordion-button {
+    text-align: center;
+    font-size: x-large;
+    background-color: #f9f8f5;
+}
+
+.accordion-collapse {
+    background-color: #f9f8f5;
+}
+
+.collapse {
+    background-color: #f9f8f5;
+}
+/* TODO: selected accordion dropdown has different background 
+    color ( should be #f9f8f5 ) */

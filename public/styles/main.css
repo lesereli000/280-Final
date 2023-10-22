@@ -1,3 +1,9 @@
 nav{
     background-color: #ece9de;
+    /* height: 60px; */
+}
+
+nav > a > img {
+    margin: 0px 20px;
+    height: 30px;
 }
