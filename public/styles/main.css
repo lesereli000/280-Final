@@ -1,9 +1,16 @@
 nav{
     background-color: #ece9de;
-    /* height: 60px; */
 }
 
 nav > a > img {
     margin: 0px 20px;
     height: 30px;
+}
+
+#switchView {
+    border: 2px solid #246bce;
+    background: #f9f8f5;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
 }
