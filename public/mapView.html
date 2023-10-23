@@ -1,127 +1,274 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Indiana 211 Services Map</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Symbols+Outlined"> -->
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css' integrity='sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==' crossorigin='anonymous'/>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css' integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g==' crossorigin='anonymous'/> 
-        <link rel='stylesheet' href="styles/main.css">
-        <link rel="stylesheet" href="styles/map.css">
-        <!-- TODO: find an icon -->
-        <!-- <link rel = "icon" type = "image/x-icon" href="favicon.ico"> -->
-    </head>
-    <body>
 
-        <nav class="navbar">
-            <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
-        </nav>
+<head>
+  <meta charset="utf-8">
+  <title>Indiana 211 Services Map</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Symbols+Outlined"> -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css'
+    integrity='sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ=='
+    crossorigin='anonymous' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css'
+    integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g=='
+    crossorigin='anonymous' />
+  <link rel='stylesheet' href="styles/main.css">
+  <link rel="stylesheet" href="styles/map.css">
+  <link rel="icon" type="image/x-icon" href="images/211.png">
+</head>
 
-        <div class="page-container">
+<body>
 
-            <div id="map">
-                <!-- TODO: find and implement a map API / library -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
+  </nav>
+
+  <div class="page-container">
+
+    <div id="map">
+      <!-- Note: We may need to or want to implement the google geocoding api 
+          to convert zip code and county information into latitude and longitude -->
+      <script>
+        function newMap() {
+          var mapProp = {
+            // Center and zoom on Terre Haute, Indiana
+            center: new google.maps.LatLng(39.4667, -87.4139),
+            zoom: 9,
+          };
+          var map = new google.maps.Map(document.getElementById("map"), mapProp);
+        }
+      </script>
+      <!-- This key is tied to my personal google account and billing. 
+          If this is implemented in a governmental capacity, this will need 
+          to be switched for a key owned and run by the government -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY&callback=newMap"></script>
+    </div>
+
+    <div class="accordion card" id="sideMenu">
+      <div class="accordion-item">
+        <h1 class="accordion-header" id="locHead">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#locBody"
+            aria-expanded="true" aria-controls="locBody">
+            Location
+          </button>
+        </h1>
+        <div id="locBody" class="accordion-collapse collapse show" aria-labelledby="locHead" data-bs-parent="#sideMenu">
+          <div class="accordion-body">
+            <div style="display: flex; justify-content:space-around; border-radius: 40px; border: 1px solid black; background-color: white;"">
+              <button style="width: 60px; border-radius: 40px; border: none; background-color: #246bce; color: white;">Find</button>
+              <input type="text" id="zip" placeholder="Zip Code:" style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
+            <br>
 
-            <div class="accordion card" id="sideMenu">
-                <div class="accordion-item">
-                    <h1 class="accordion-header" id="locHead">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#locBody" aria-expanded="true" aria-controls="locBody">
-                        Location
-                        </button>
-                    </h1>
-                    <div id="locBody" class="accordion-collapse collapse show" aria-labelledby="locHead" data-bs-parent="#sideMenu">
-                        <div class="accordion-body">
-                            <!-- TODO: finish styles for this section -->
-                            <div style="display: flex; justify-content:space-around;">
-                                <button>Find</button>
-                                <input type="text" id="zip" placeholder="Zip Code:" style="width: 10em;"><br><br>
-                            </div>
-                            <br>
-
-                            <div style="display: flex; justify-content:space-around;">
-                                <button>Find</button>
-                                <input type="text" id="county" placeholder="County:" style="width: 10em;"><br><br>
-                            </div>
-                            <br>
-                            
-                            <label for="dist" id="distLabel">Max Distance: 10 Miles</label>
-                            <input type="range" min="1" max="50" value="10" class="slider" id="dist" name="dist">
-                        </div>
-                    </div>
-                </div>
-                <p id="locationLabel">Showing services near 47807</p>
-                <hr>
-                <div class="accordion-item">
-                    <h1 class="accordion-header" id="servHead">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servBody" aria-expanded="false" aria-controls="servBody">
-                        Services
-                        </button>
-                    </h1>
-                    <div id="servBody" class="accordion-collapse collapse" aria-labelledby="servHead" data-bs-parent="#sideMenu">
-                        <div class="accordion-body">
-
-                        <!-- TODO: Update Accordion with Taxonomy Info -->
-                        <!-- Inner Accordion -->
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      #1
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      <strong>This is the first item's accordion body.</strong> 
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      #2
-                                    </button>
-                                  </h2>
-                                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      <strong>This is the second item's accordion body.</strong> 
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                      #3
-                                    </button>
-                                  </h2>
-                                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      <strong>This is the third item's accordion body.</strong> 
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                        <!-- End Inner Accordion -->
-
-                        </div>
-                    </div>
-                </div>
+            <div style="display: flex; justify-content:space-around; border-radius: 40px; border: 1px solid black; background-color: white;">
+              <button style="width: 60px; border-radius: 40px; border: none; background-color: #246bce; color: white;">Find</button>
+              <input type="text" id="county" placeholder="County:" style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
+            <br>
 
-            <div class="card" id="search">
-                <!-- TODO: create and style a search bar -->
-                <input type="text" id="searchBar" placeholder="Search by keyword or name" style="border: none;">
-            </div>
-
-            <a href="gridView.html"><button type="button" class="btn" id="switchView">To Grid View</button></a>
-
+            <label for="dist" id="distLabel">Max Distance: 10 Miles</label>
+            <input type="range" min="1" max="50" value="10" class="slider" id="dist" name="dist">
+          </div>
         </div>
+      </div>
 
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js' integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw==' crossorigin='anonymous'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js' integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw==' crossorigin='anonymous'></script>
-        <script src="scripts/main.js" async defer></script>
-        <script src="scripts/map.js" async defer></script>
-    </body>
+      <p id="locationLabel">Showing services near 47807</p>
+      <hr>
+
+      <div class="accordion-item">
+        <h1 class="accordion-header" id="servHead">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servBody"
+            aria-expanded="false" aria-controls="servBody">
+            Services
+          </button>
+        </h1>
+        <div id="servBody" class="accordion-collapse collapse" aria-labelledby="servHead" data-bs-parent="#sideMenu">
+          <div class="accordion-body" id="servCont">
+
+            <!-- TODO: Update Accordion with Subcategory Taxonomy Info -->
+            <!-- Inner Accordion -->
+            <div class="accordion" id="servicesAccordion">
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="food">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#foodCollapse"
+                    aria-expanded="true" aria-controls="foodCollapse">
+                    Food
+                  </button>
+                </h2>
+                <div id="foodCollapse" class="accordion-collapse collapse" aria-labelledby="food"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="housing">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#housingCollapse"
+                    aria-expanded="true" aria-controls="housingCollapse">
+                    Housing
+                  </button>
+                </h2>
+                <div id="housingCollapse" class="accordion-collapse collapse" aria-labelledby="housing"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="goods">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#goodsCollapse"
+                    aria-expanded="true" aria-controls="goodsCollapse">
+                    Goods
+                  </button>
+                </h2>
+                <div id="goodsCollapse" class="accordion-collapse collapse" aria-labelledby="goods"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="transit">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#transitCollapse"
+                    aria-expanded="true" aria-controls="transitCollapse">
+                    Transit
+                  </button>
+                </h2>
+                <div id="transitCollapse" class="accordion-collapse collapse" aria-labelledby="transit"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="health">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#healthCollapse"
+                    aria-expanded="true" aria-controls="healthCollapse">
+                    Health
+                  </button>
+                </h2>
+                <div id="healthCollapse" class="accordion-collapse collapse" aria-labelledby="health"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="money">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#moneyCollapse"
+                    aria-expanded="true" aria-controls="moneyCollapse">
+                    Money
+                  </button>
+                </h2>
+                <div id="moneyCollapse" class="accordion-collapse collapse" aria-labelledby="money"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="care">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#careCollapse"
+                    aria-expanded="true" aria-controls="careCollapse">
+                    Care
+                  </button>
+                </h2>
+                <div id="careCollapse" class="accordion-collapse collapse" aria-labelledby="care"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="edu">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#eduCollapse"
+                    aria-expanded="true" aria-controls="eduCollapse">
+                    Education
+                  </button>
+                </h2>
+                <div id="eduCollapse" class="accordion-collapse collapse" aria-labelledby="edu"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="work">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#workCollapse"
+                    aria-expanded="true" aria-controls="workCollapse">
+                    Work
+                  </button>
+                </h2>
+                <div id="workCollapse" class="accordion-collapse collapse" aria-labelledby="work"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="legal">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#legalCollapse"
+                    aria-expanded="true" aria-controls="legalCollapse">
+                    Legal
+                  </button>
+                </h2>
+                <div id="legalCollapse" class="accordion-collapse collapse" aria-labelledby="legal"
+                  data-bs-parent="#servicesAccordion">
+                  <div class="accordion-body">
+                    <!-- Insert all subcategories here -->
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <!-- End Inner Accordion -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="search">
+      <div style="display: flex; justify-content: space-between; transform: translateY(-2px);">
+        <img src="images/search.png" alt="search icon" style="height: 20px; width: 20px; transform: translateY(3px);">
+        <div style="height: 30px; width: 2px; background-color: black;"></div>
+        <input type="text" id="searchBar" placeholder="Search by keyword or name"
+          style="border: none; background-color: #f9f8f5; width: 45vw">
+      </div>
+    </div>
+
+    <a href="gridView.html"><button type="button" class="btn" id="switchView">To Grid View</button></a>
+
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'
+    integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw=='
+    crossorigin='anonymous'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js'
+    integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw=='
+    crossorigin='anonymous'></script>
+  <script src="scripts/main.js" async defer></script>
+  <script src="scripts/map.js" async defer></script>
+</body>
+
 </html>

@@ -6,7 +6,7 @@ body {
     margin: 0;
     margin-left: 50px;
     position: absolute;
-    top: 50%;
+    top: 55%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 15em;
@@ -21,7 +21,8 @@ body {
     height: 50px;
     background-color: #f9f8f5;
     position: absolute;
-    transform: translate(75%, -95vh);
+    transform: translate(75%, -90vh);
+    padding: 10px 3px;
 }
 
 #locationLabel {
@@ -31,18 +32,16 @@ body {
     color: gray;
 }
 
-/* This is just a placeholder for map styling */
 #map {
     width: 100vw;
-    height: 100vh;
-    background-color: blanchedalmond;
+    height: 94vh;
 }
 
 hr {
     margin: 5px;
 }
 
-h1 > .accordion-button {
+h1 .accordion-button {
     text-align: center;
     font-size: x-large;
     background-color: #f9f8f5;
@@ -55,7 +54,26 @@ h1 > .accordion-button {
 .collapse {
     background-color: #f9f8f5;
 }
-/* TODO: selected accordion dropdown has different background 
-    color ( should be #f9f8f5 ) */
+
+#switchView {
+    right: 75px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#servCont {
+    padding: 5px;
+}
+
+#servicesAccordion button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h2 .accordion-button {
+    background-color: #f9f8f5;
+}
 
 /* TODO: mobile styling ( anything smaller than roughly 700px ) */
