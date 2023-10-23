@@ -55,10 +55,6 @@ h1 .accordion-button {
     background-color: #f9f8f5;
 }
 
-#switchView {
-    right: 75px;
-}
-
 textarea:focus, input:focus{
     outline: none;
 }
