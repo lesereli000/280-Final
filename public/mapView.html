@@ -34,7 +34,7 @@
           var mapProp = {
             // Center and zoom on Terre Haute, Indiana
             center: new google.maps.LatLng(39.4667, -87.4139),
-            zoom: 9,
+            zoom: 12,
             disableDefaultUI: true,
           };
           var map = new google.maps.Map(document.getElementById("map"), mapProp);
@@ -87,7 +87,6 @@
         <div id="servBody" class="accordion-collapse collapse" aria-labelledby="servHead" data-bs-parent="#sideMenu">
           <div class="accordion-body" id="servCont">
 
-            <!-- TODO: Update Accordion with Subcategory Taxonomy Info -->
             <!-- Inner Accordion -->
             <div class="accordion" id="servicesAccordion">
 
@@ -101,7 +100,14 @@
                 <div id="foodCollapse" class="accordion-collapse collapse" aria-labelledby="food"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Emergency Food</button>
+                      <button class="taxon-sub-cat-btn btn">Food Delivery</button>
+                      <button class="taxon-sub-cat-btn btn">Food Pantry</button>
+                      <button class="taxon-sub-cat-btn btn">Help Pay For Food</button>
+                      <button class="taxon-sub-cat-btn btn">Meals</button>
+                      <button class="taxon-sub-cat-btn btn">Nutrition Education</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,7 +122,14 @@
                 <div id="housingCollapse" class="accordion-collapse collapse" aria-labelledby="housing"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Help Find Housing</button>
+                      <button class="taxon-sub-cat-btn btn">Help Pay For Housing</button>
+                      <button class="taxon-sub-cat-btn btn">Housing Advice</button>
+                      <button class="taxon-sub-cat-btn btn">Maintenance and Repairs</button>
+                      <button class="taxon-sub-cat-btn btn">Residential Housing</button>
+                      <button class="taxon-sub-cat-btn btn">Temporary Shelter</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -131,7 +144,14 @@
                 <div id="goodsCollapse" class="accordion-collapse collapse" aria-labelledby="goods"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Baby Supplies</button>
+                      <button class="taxon-sub-cat-btn btn">Clothing</button>
+                      <button class="taxon-sub-cat-btn btn">Home Goods</button>
+                      <button class="taxon-sub-cat-btn btn">Medical Supplies</button>
+                      <button class="taxon-sub-cat-btn btn">Personal Safety</button>
+                      <button class="taxon-sub-cat-btn btn">Toys & Gifts</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -146,7 +166,10 @@
                 <div id="transitCollapse" class="accordion-collapse collapse" aria-labelledby="transit"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Help Pay For Transit</button>
+                      <button class="taxon-sub-cat-btn btn">Transportation</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -161,7 +184,17 @@
                 <div id="healthCollapse" class="accordion-collapse collapse" aria-labelledby="health"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Addiction & Recovery</button>
+                      <button class="taxon-sub-cat-btn btn">Dental Care</button>
+                      <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
+                      <button class="taxon-sub-cat-btn btn">Health Education</button>
+                      <button class="taxon-sub-cat-btn btn">Help Pay For Healthcare</button>
+                      <button class="taxon-sub-cat-btn btn">Medical Care</button>
+                      <button class="taxon-sub-cat-btn btn">Mental Health Care</button>
+                      <button class="taxon-sub-cat-btn btn">Sexual And Reproductive Health</button>
+                      <button class="taxon-sub-cat-btn btn">Vision Care</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -176,7 +209,14 @@
                 <div id="moneyCollapse" class="accordion-collapse collapse" aria-labelledby="money"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Financial Assistance</button>
+                      <button class="taxon-sub-cat-btn btn">Financial Education</button>
+                      <button class="taxon-sub-cat-btn btn">Government Benefits</button>
+                      <button class="taxon-sub-cat-btn btn">Insurance</button>
+                      <button class="taxon-sub-cat-btn btn">Loans</button>
+                      <button class="taxon-sub-cat-btn btn">Tax Preparation</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -191,7 +231,17 @@
                 <div id="careCollapse" class="accordion-collapse collapse" aria-labelledby="care"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Adoption & Foster Care</button>
+                      <button class="taxon-sub-cat-btn btn">Animal Welfare</button>
+                      <button class="taxon-sub-cat-btn btn">Community Support Services</button>
+                      <button class="taxon-sub-cat-btn btn">Daytime Care</button>
+                      <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
+                      <button class="taxon-sub-cat-btn btn">Navigating The System</button>
+                      <button class="taxon-sub-cat-btn btn">Physical Safety</button>
+                      <button class="taxon-sub-cat-btn btn">Residential Care</button>
+                      <button class="taxon-sub-cat-btn btn">Support Network</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -206,7 +256,14 @@
                 <div id="eduCollapse" class="accordion-collapse collapse" aria-labelledby="edu"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Help Find School</button>
+                      <button class="taxon-sub-cat-btn btn">Help Pay For School</button>
+                      <button class="taxon-sub-cat-btn btn">More Education</button>
+                      <button class="taxon-sub-cat-btn btn">Preschool</button>
+                      <button class="taxon-sub-cat-btn btn">Screening & Exams</button>
+                      <button class="taxon-sub-cat-btn btn">Skills & Training</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -221,7 +278,13 @@
                 <div id="workCollapse" class="accordion-collapse collapse" aria-labelledby="work"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Help Find Work</button>
+                      <button class="taxon-sub-cat-btn btn">Help Pay For Work Expenses</button>
+                      <button class="taxon-sub-cat-btn btn">Skills & Training</button>
+                      <button class="taxon-sub-cat-btn btn">Supported Employment</button>
+                      <button class="taxon-sub-cat-btn btn">Workplace Rights</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -236,11 +299,16 @@
                 <div id="legalCollapse" class="accordion-collapse collapse" aria-labelledby="legal"
                   data-bs-parent="#servicesAccordion">
                   <div class="accordion-body">
-                    <!-- Insert all subcategories here -->
+                    <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                      <button class="taxon-sub-cat-btn btn">Advocacy & Legal Aid</button>
+                      <button class="taxon-sub-cat-btn btn">Mediation</button>
+                      <button class="taxon-sub-cat-btn btn">Notary</button>
+                      <button class="taxon-sub-cat-btn btn">Representation</button>
+                      <button class="taxon-sub-cat-btn btn">Translation & Interpretation</button>
+                    </div>
                   </div>
                 </div>
               </div>
-              
             </div>
             <!-- End Inner Accordion -->
 
@@ -250,7 +318,7 @@
     </div>
 
     <div class="card" id="search">
-      <div style="display: flex; justify-content: space-between; transform: translateY(-2px);">
+      <div style="display: flex; justify-content: space-evenly; transform: translateY(-2px);">
         <img src="images/search.png" alt="search icon" style="height: 20px; width: 20px; transform: translateY(3px);">
         <div style="height: 30px; width: 2px; background-color: black;"></div>
         <input type="text" id="searchBar" placeholder="Search by keyword or name"
@@ -269,7 +337,7 @@
     integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw=='
     crossorigin='anonymous'></script>
   <script src="scripts/main.js" async defer></script>
-  <script src="scripts/map.js" async defer></script>
+  <script src="scripts/map.js" async></script>
 </body>
 
 </html>
