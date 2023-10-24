@@ -20,42 +20,62 @@
             <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
         </nav>
     
-    <div class="container-lg my-3">
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <!-- Carousel indicators -->
-            <ol class="carousel-indicators">
-                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-            </ol>
+        <div class="row">
+            <div class="col-lg-6" id="imgContainer">
+                <div class="container-lg">
+                    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+                        </ol>
     
-            <!-- Wrapper for carousel items -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/carousel images/child care.jpg" class="d-block w-100" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/carousel images/people talking.jpg" class="d-block w-100" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/carousel images/woman and baby.jpg" class="d-block w-100" alt="Slide 3">
-                </div>
-            </div>
-    
-            <!-- Carousel controls -->
-            <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-                <!-- <span class="carousel-control-prev-icon"></span> -->
-                <img src="images/nav arrow.png" alt="left" id="leftArrow">
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-                <!-- <span class="carousel-control-next-icon"></span> -->
-                <img src="images/nav arrow.png" alt="right" id="rightArrow">
-            </a>
-        </div>
-    </div>
-
-    <a href="mapView.html"><button>Find Services Near You</button></a>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="images/carousel images/child care.jpg" class="d-block w-100" alt="Slide 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/carousel images/people talking.jpg" class="d-block w-100" alt="Slide 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/carousel images/woman and baby.jpg" class="d-block w-100" alt="Slide 3">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6" id="searchContainer">
+                        <h2 id="titleMessage">Here at Indiana 211 we love to help! Search through our resources to find the assistance you
+                            need</h2>
+                        <h6 class="searchTags">Zip Code:</h6>
+                        <div class="card" id="zipcode" style="width: 45vw; background-color: #1fe0; height: 3vh;">
+                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
+                                <input type="text" id="zipcodeSearch" placeholder="Enter Zipcode"
+                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh">
+                            </div>
+                        </div>
+                        <h6 class="searchTags">County:</h6>
+                        <div class="card" id="county" style="width: 45vw; background-color: #1fe0; height:3vh">
+                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
+                                <input type="text" id="countySearch" placeholder="Enter County"
+                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh;">
+                            </div>
+                        </div>
+                        <h6 class="searchTags">Search:</h6>
+                        <div class="card" id="county" style="width: 45vw; background-color: #1fe0; height: 3vh;">
+                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
+                                <input type="text" id="countySearch" placeholder="Enter Search Terms"
+                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh;">
+                            </div>
+                        </div>
+                        <br>
+                        <a href="mapView.html"><button id="mapButton" style="width: 10vw; height: 5vh; font-size: 1vh;">Find Services Near
+                                You</button></a>
+                    </div>
+                    </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'
         integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw=='
         crossorigin='anonymous'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js' integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw==' crossorigin='anonymous'></script>
