@@ -21,6 +21,8 @@ for (const subcat of subcats) {
 }
 
 // TODO: data API implementation
-// TODO: Implement result filtering
+// TODO: utilize geocoding API
+// TODO: implement result filtering
 // TODO: add locations to map
 // TODO: create modal to pop up on location
+// TODO: be able to unselect subcat
