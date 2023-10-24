@@ -6,13 +6,16 @@ body {
     margin: 0;
     margin-left: 50px;
     position: absolute;
-    top: 55%;
+    top: 53%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 15em;
     border: 2px solid #246bce;
     background-color: #f9f8f5;
     text-align: center;
+    max-height: 700px;
+    overflow-y: auto;
+    border-radius: 10px;
 }
 
 #search{
@@ -70,6 +73,49 @@ textarea:focus, input:focus{
 
 h2 .accordion-button {
     background-color: #f9f8f5;
+}
+
+#servicesAccordion .accordion-body{
+    padding: 5px;
+}
+
+.btn-group-vertical {
+    width: 13em;
+    box-shadow: none;
+}
+
+.taxon-sub-cat-btn {
+    text-align: left;
+    padding: 0px 24px;
+}
+
+.taxon-sub-cat-btn:hover {
+    font-size: 115%;
+}
+
+.btn-group-vertical:hover {
+    box-shadow: none;
+}
+
+.taxon-sub-cat-btn.active  {
+    color: #246bce;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 40px;
+    background: lightgray;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
 }
 
 /* TODO: mobile styling ( anything smaller than roughly 700px ) */
