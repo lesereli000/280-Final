@@ -33,8 +33,8 @@
         function newMap() {
           var mapProp = {
             // Center and zoom on Terre Haute, Indiana
-            center: new google.maps.LatLng(39.4667, -87.4139),
-            zoom: 12,
+            center: new google.maps.LatLng(39.7684, -86.1581),
+            zoom: 11,
             disableDefaultUI: true,
           };
           var map = new google.maps.Map(document.getElementById("map"), mapProp);
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <p id="locationLabel">Showing services near 47807</p>
+      <p id="locationLabel">Showing services near 46255</p>
       <hr>
 
       <div class="accordion-item">
@@ -318,11 +318,11 @@
     </div>
 
     <div class="card" id="search">
-      <div style="display: flex; justify-content: space-evenly; transform: translateY(-2px);">
+      <div style="display: flex; justify-content: space-evenly; transform: translateY(-1px);">
         <img src="images/search.png" alt="search icon" style="height: 20px; width: 20px; transform: translateY(3px);">
-        <div style="height: 30px; width: 2px; background-color: black;"></div>
+        <!-- <div style="height: 30px; width: 2px; background-color: black;"></div> -->
         <input type="text" id="searchBar" placeholder="Search by keyword or name"
-          style="border: none; background-color: #f9f8f5; width: 45vw">
+          style="border: none; background-color: #f9f8f5; width: 45vw; padding-left: 15px;">
       </div>
     </div>
 
