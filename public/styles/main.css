@@ -14,3 +14,16 @@ nav > a > img {
     bottom: 50px;
     right: 50px;
 }
+.carousel-item {
+    min-height: 280px;
+}
+
+#leftArrow {
+    transform: rotate(-90deg);
+    width: 50%;
+}
+
+#rightArrow {
+    transform: rotate(90deg);
+    width: 50%;
+}
