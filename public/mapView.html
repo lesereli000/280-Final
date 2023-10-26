@@ -56,19 +56,19 @@
         </h1>
         <div id="locBody" class="accordion-collapse collapse show" aria-labelledby="locHead" data-bs-parent="#sideMenu">
           <div class="accordion-body">
-            <div style="display: flex; justify-content:space-around; border-radius: 40px; border: 1px solid black; background-color: white;"">
-              <button style="width: 60px; border-radius: 40px; border: none; background-color: #246bce; color: white;">Find</button>
-              <input type="text" id="zip" placeholder="Zip Code:" style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
+            <div style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
+              <button class="find-btn">Find</button>
+              <input type="text" id="zip" placeholder="Zip Code:" style="width: 8em; border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
             <br>
 
-            <div style="display: flex; justify-content:space-around; border-radius: 40px; border: 1px solid black; background-color: white;">
-              <button style="width: 60px; border-radius: 40px; border: none; background-color: #246bce; color: white;">Find</button>
+            <div style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
+              <button class="find-btn">Find</button>
               <input type="text" id="county" placeholder="County:" style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
             <br>
 
-            <label for="dist" id="distLabel">Max Distance: 10 Miles</label>
+            <label for="dist" id="distLabel">Max Distance: 10 Miles</label><br>
             <input type="range" min="1" max="50" value="10" class="slider" id="dist" name="dist">
           </div>
         </div>
@@ -143,7 +143,7 @@
                 </h2>
                 <div id="goodsCollapse" class="accordion-collapse collapse" aria-labelledby="goods"
                   data-bs-parent="#servicesAccordion">
-                  <div class="accordion-body">
+                  <div class="accordion-body left-align">
                     <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
                       <button class="taxon-sub-cat-btn btn">Baby Supplies</button>
                       <button class="taxon-sub-cat-btn btn">Clothing</button>
