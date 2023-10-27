@@ -20,6 +20,19 @@ for (const subcat of subcats) {
     };
 }
 
+const qString = window.location.search;
+const urlParams = new URLSearchParams(qString);
+
+const zipBox = document.getElementById("zip");
+const countyBox = document.getElementById("county");
+
+let zip = urlParams.get('zip');
+zipBox.value = zip;
+
+let county = urlParams.get('cty');
+countyBox.value = county;
+
+
 // TODO: data API implementation
 // TODO: utilize geocoding API
 // TODO: implement result filtering
