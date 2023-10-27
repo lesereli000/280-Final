@@ -50,37 +50,33 @@
                         <h2 id="titleMessage">Here at Indiana 211 we love to help! Search through our resources to find the assistance you
                             need</h2>
                         <h6 class="searchTags">Zip Code:</h6>
-                        <div class="card" id="zipcode" style="width: 45vw; background-color: #1fe0; height: 3vh;">
-                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
-                                <input type="text" id="zipcodeSearch" placeholder="Enter Zipcode"
-                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh">
+                        <div class="card searchBar" id="zipcode">
+                            <div>
+                                <input type="text" id="zipcodeSearch" placeholder="Enter Zipcode">
                             </div>
                         </div>
                         <h6 class="searchTags">County:</h6>
-                        <div class="card" id="county" style="width: 45vw; background-color: #1fe0; height:3vh">
-                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
-                                <input type="text" id="countySearch" placeholder="Enter County"
-                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh;">
+                        <div class="card searchBar" id="county">
+                            <div>
+                                <input type="text" id="countySearch" placeholder="Enter County">
                             </div>
                         </div>
                         <h6 class="searchTags">Search:</h6>
-                        <div class="card" id="county" style="width: 45vw; background-color: #1fe0; height: 3vh;">
-                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
-                                <input type="text" id="countySearch" placeholder="Enter Search Terms"
-                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh;">
+                        <div class="card searchBar" id="search">
+                            <div>
+                                <input type="text" id="countySearch" placeholder="Enter Search Terms">
                             </div>
                         </div>
                         <br>
-                        <a href="mapView.html"><button id="mapButton" style="width: 10vw; height: 5vh; font-size: 1vh;">Find Services Near
-                                You</button></a>
+                        <a href="mapView.html"><button id="mapButton">Find Services Near You</button></a>
                     </div>
                     </div>
                     <br>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card" style="width:37vw">
+                    <div class="col-lg-6 news">
+                        <div class="card">
                             <img class="card-img-top" src="images/news images/SNAP-benefit-fraud.jpg" alt="Credit Cards">
                             <div class="card-body">
                                 <h4 class="card-title">SNAP News</h4>
@@ -89,7 +85,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="card" style="width:37vw">
+                        <div class="card">
                             <img class="card-img-top" src="images/news images/IPPP-homepage-Main_Banner_2021-sm (1).jpg" alt="Woman and a Baby">
                             <div class="card-body">
                                 <h4 class="card-title">IPPP</h4>
@@ -98,8 +94,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="card" style="width:37vw">
+                    <div class="col-lg-6 news">
+                        <div class="card">
                             <img class="card-img-top" src="images/news images/Employer-Sponsered-Childcare-05.jpg" alt="Young Family">
                             <div class="card-body">
                                 <h4 class="card-title">Child Care Grant</h4>
@@ -108,7 +104,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="card" style="width:37vw">
+                        <div class="card">
                             <img class="card-img-top" src="images/news images/child-care-finder (1).jpg" alt="Child Care">
                             <div class="card-body">
                                 <h4 class="card-title">Child Care</h4>
@@ -122,26 +118,66 @@
         </div>
 
         <footer>
-            <div class="row" style="background: #ece9de;">
+            <div class="row">
                 <div class="col-lg-2">
-                    Contact
+                    <h6>Get Help</h6>
+                    <hr>
+                    <p>Please Contact Us By: <br>
+                        <strong>Phone:</strong> Dial <a href="tel:211">2-1-1</a> or <a href="tel:8662119966">1-866-211-9966</a> <br>
+                        (available 24/7) <br>
+                        <br>
+                        <strong>Text:</strong> Text your ZIP Code to <a href="tel:898211">898-211</a> <br>
+                        (available Mon-Fri 8am-5pm)
+                    </p>
                 </div>
                 <div class="col-lg-2">
-                    Contact Info   
+                    <h6>Contact Information</h6>
+                    <hr>
+                    <p>
+                        <strong>FSSA Indiana 211</strong> <br>
+                        Website <a href="www.in211.org">www.in211.org</a> <br>
+                        Email: <a href="mailto:in211info@fssa.in.gov">in211info@fssa.in.gov</a>
+                    </p>
                 </div>
                 <div class="col-lg-2">
-                    Referral Data                           
+                    <h6>Community & Referral Data</h6>
+                    <hr>
+                    <p>
+                        <a href="https://in211.communityos.org/datadashboard">Indiana 211 Data Dashboard</a> <br>
+                        <a href="https://www.in.gov/fssa/fssa-data-and-analytics/">FSSA Data Requests</a>
+                    </p>
                 </div>
                 <div class="col-lg-2">
-                    Database                                            
+                    <h6>Resource Database</h6>
+                    <hr>
+                    <p>
+                        <a href="https://in211.communityos.org/advanced-search">Find Resources</a> <br>
+                        <a href="https://in211.communityos.org/Service-Provider-Search">Update your info</a> <br>
+                        <a href="https://in211.communityos.org/New-Resource-Request">Request Inclusion</a>
+                    </p>
                 </div>
                 <div class="col-lg-2">
-                    Services                                                            
+                    <h6>Contract Services</h6>
+                    <hr>
+                    <p>
+                        <a href="https://in211.communityos.org/current-projects">Current Projects</a> <br>
+                        <a href="https://in211.communityos.org/contact-center-solutions">Contact Center Solutions</a> <br>
+                        <a href="https://in211.communityos.org/resource-database-management">Resource Database Management</a>
+                    </p>
                 </div>
                 <div class="col-lg-2">
-                    Social                                                                            
+                    <h6>Social</h6>
+                    <hr>
+                    <p>
+                        <a href="https://twitter.com/in211info">Twitter</a> <br>
+                        <a href="https://facebook.com/in211">Facebook</a> <br>
+                        <a href="https://www.instagram.com/in211info/?hl=en">Instagram</a> <br>
+                        <button>Contact Us Today</button>
+                    </p>
                 </div>
             </div>
+            <hr>
+            <h5>Indiana 211 is a division of the Indiana Family and Social Services Administration</h5>
         </footer>
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'

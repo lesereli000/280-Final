@@ -67,3 +67,53 @@ body {
 #mapButton>* {
     padding: 0px 150px;
 }
+#searchContainer>.card {
+    width: 45vw;
+    background-color: #1fe0;
+    height: 3vh;
+}
+
+.searchBar>div {
+    display: inline-block;
+    justify-content: space-between;
+    transform: translateY(-2px);
+}
+
+.searchBar>div>input {
+    border: none;
+    background-color: #f9f8f5;
+    width: 45vw;
+    height: 3vh;
+}
+
+#mapButton {
+    width: 10vw;
+    height: 5vh;
+    font-size: 1vh;
+}
+
+.news>div {
+    width: 37vw;
+}
+
+footer>.row {
+    background: #ece9de;
+    padding: 2vw;
+}
+
+footer {
+    margin-top: 5vh;
+}
+
+footer>div>div>h6 {
+    font-size: 1.8vh;
+    text-align: center;
+}
+
+footer>div>div>p {
+    font-size: 1.5vh;
+}
+
+footer>div>div>*>a {
+    color: #005191;
+}
