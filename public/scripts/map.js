@@ -8,15 +8,54 @@ slider.oninput = function(){
 
 const subcats = document.querySelectorAll(".taxon-sub-cat-btn");
 
-for (const subcat of subcats) {
-    subcat.onclick = function() {
-        const siblings = this.parentElement.children;
-        for (let k = 0; k < siblings.length; k++) {
-            if (siblings[k].classList.contains("active")) {
-                siblings[k].classList.remove("active");
-            }
+// for (const subcat of subcats) {
+//     subcat.onclick = function() {
+//         const siblings = this.parentElement.children;
+//         for (let k = 0; k < siblings.length; k++) {
+//             if (siblings[k].classList.contains("active")) {
+//                 siblings[k].classList.remove("active");
+//             }
+//         }
+//         this.classList.add("active");
+//     };
+// }
+
+let activeFilters = [];
+
+function cleanArray(array){
+    let newArr = [];
+    for( const val of array){
+        if (val != undefined){
+            newArr.push(val);
         }
-        this.classList.add("active");
+    }
+    return newArr;
+}
+
+for (const subcat of subcats){
+    subcat.onclick = function() {
+        this.classList.toggle("active");
+        if (this.classList.contains("active")){
+            activeFilters.push(this.textContent);
+        } else {
+            activeFilters[activeFilters.indexOf(this.textContent)] = undefined;
+            activeFilters = cleanArray(activeFilters);
+        }
+        // console.log(activeFilters);
+    };
+}
+
+const headers = document.querySelectorAll(".taxon-header");
+
+for (const header of headers){
+    header.onclick = function(){
+        activeFilters = [];
+        // console.log(activeFilters);
+        for(const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)){
+            subcat.classList.remove("active");
+            // console.log(subcat);
+        }
+        // console.log();
     };
 }
 
@@ -38,4 +77,3 @@ countyBox.value = county;
 // TODO: implement result filtering
 // TODO: add locations to map
 // TODO: create modal to pop up on location
-// TODO: be able to unselect subcat
