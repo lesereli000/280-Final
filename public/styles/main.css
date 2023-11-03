@@ -97,7 +97,6 @@ body {
 }
 
 footer>.row {
-    background: #ece9de;
     padding: 2vw;
 }
 
@@ -116,4 +115,33 @@ footer>div>div>p {
 
 footer>div>div>*>a {
     color: #005191;
+}
+footer {
+    background: #ece9de
+}
+
+footer>h5 {
+    margin-bottom: 0px;
+    font-size: 1.8vh;
+    padding-bottom: 8px;
+}
+
+.card {
+    flex-direction: row;
+}
+
+.card img {
+    width: 30%;
+}
+
+.jumbotron {
+    margin-top: 5vh;
+}
+
+body {
+    background-color: #005191;
+}
+
+#mainSection {
+    background-color: #fff;
 }

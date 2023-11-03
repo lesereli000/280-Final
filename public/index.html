@@ -20,7 +20,7 @@
             <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
         </nav>
     
-        <div class="row">
+        <div class="row" id="mainSection">
             <div class="col-lg-6" id="imgContainer">
                 <div class="container-lg">
                     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -62,10 +62,9 @@
                             </div>
                         </div>
                         <h6 class="searchTags">Search:</h6>
-                        <div class="card" id="county" style="width: 45vw; background-color: #1fe0; height: 3vh;">
-                            <div style="display: inline-block; justify-content: space-between; transform: translateY(-2px);">
-                                <input type="text" id="searchTags" placeholder="Enter Search Terms"
-                                    style="border: none; background-color: #f9f8f5; width: 45vw; height: 3vh;">
+                        <div class="card searchBar" id="county">
+                            <div>
+                                <input type="text" id="searchTags" placeholder="Enter Search Terms">
                             </div>
                         </div>
                         <br>
