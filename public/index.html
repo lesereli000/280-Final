@@ -47,28 +47,31 @@
                     </div>
                     </div>
                     <div class="col-lg-6" id="searchContainer">
-                        <h2 id="titleMessage">Here at Indiana 211 we love to help! Search through our resources to find the assistance you
+                        <h2 id="titleMessage">Here at Indiana 211 we love to help! Search through our resources to find the assistance
+                            you
                             need</h2>
-                        <h6 class="searchTags">Zip Code:</h6>
+                        <h6 class="searchTags">Zip Code</h6>
                         <div class="card searchBar" id="zipcode">
                             <div>
-                                <input type="text" id="zipcodeSearch" placeholder="Enter Zipcode">
+                                <input type="text" id="zipcodeSearch" placeholder="Enter Zipcode" autocomplete="on">
                             </div>
                         </div>
-                        <h6 class="searchTags">County:</h6>
+                        <h6 class="searchTags">County</h6>
                         <div class="card searchBar" id="county">
                             <div>
-                                <input type="text" id="countySearch" placeholder="Enter County">
+                                <input type="text" id="countySearch" placeholder="Enter County" autocomplete="address-level1">
                             </div>
                         </div>
-                        <h6 class="searchTags">Search:</h6>
+                        <h6 class="searchTags">Search</h6>
                         <div class="card searchBar" id="county">
                             <div>
                                 <input type="text" id="searchTags" placeholder="Enter Search Terms">
                             </div>
                         </div>
                         <br>
-                        <button id="mapButton">Find Services Near You</button>
+                        <div id="mapButtonContainer">
+                            <button id="mapButton" class="btn btn-primary">Find Services Near You</button>
+                        </div>
                     </div>
                     </div>
                     <br>
@@ -172,12 +175,15 @@
                         <a href="https://twitter.com/in211info">Twitter</a> <br>
                         <a href="https://facebook.com/in211">Facebook</a> <br>
                         <a href="https://www.instagram.com/in211info/?hl=en">Instagram</a> <br>
-                        <button>Contact Us Today</button>
                     </p>
+                    <div id="contactContainer">
+                        <a href="https://in211.communityos.org/contact-us-business"><button class="btn btn-danger">Contact Us
+                                Today</button></a>
+                    </div>
                 </div>
             </div>
             <hr>
-            <h5>Indiana 211 is a division of the Indiana Family and Social Services Administration</h5>
+            <h5> &emsp; Indiana 211 is a division of the Indiana Family and Social Services Administration</h5>
         </footer>
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'

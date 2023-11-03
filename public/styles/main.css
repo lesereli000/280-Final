@@ -1,5 +1,11 @@
-nav{
+.navbar {
     background-color: #ece9de;
+    --mdb-navbar-box-shadow: 0 0 0 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 6vh;
+        z-index: 9;
 }
 
 nav > a > img {
@@ -16,22 +22,6 @@ nav > a > img {
 }
 .carousel-item {
     min-height: 280px;
-}
-
-#leftArrow {
-    transform: rotate(-90deg);
-    width: 50%;
-}
-
-#rightArrow {
-    transform: rotate(90deg);
-    width: 50%;
-}
-#searchContainer {
-    /* vertical-align: middle;
-    padding: auto;
-    align-items: center; */
-    align-self: center;
 }
 
 .col-lg-6 {
@@ -53,10 +43,20 @@ body {
 
 #titleMessage {
     font-size: 2.5vh;
+    color: black;
+        margin-bottom: 15px;
 }
 
 #searchContainer {
+    padding-left: 1vh;
     padding-right: 5vw;
+    margin-right: 0px;
+        /* --mdb-gutter-x: 0px; */
+        align-self: center;
+    }
+    
+    .row {
+        --mdb-gutter-x: 0px;
 }
 
 .carousel .carousel-item>img {
@@ -67,10 +67,9 @@ body {
 #mapButton>* {
     padding: 0px 150px;
 }
-#searchContainer>.card {
-    width: 45vw;
-    background-color: #1fe0;
-    height: 3vh;
+#imgContainer>div {
+    --mdb-gutter-x: 1.5rem;
+    padding-left: 0px;
 }
 
 .searchBar>div {
@@ -81,15 +80,9 @@ body {
 
 .searchBar>div>input {
     border: none;
-    background-color: #f9f8f5;
+    background-color: rgba(0, 0, 0, 0);
     width: 45vw;
     height: 3vh;
-}
-
-#mapButton {
-    width: 10vw;
-    height: 5vh;
-    font-size: 1vh;
 }
 
 .news>div {
@@ -123,7 +116,8 @@ footer {
 footer>h5 {
     margin-bottom: 0px;
     font-size: 1.8vh;
-    padding-bottom: 8px;
+    padding-bottom: 16px;
+        padding-left: 10px;
 }
 
 .card {
@@ -143,5 +137,21 @@ body {
 }
 
 #mainSection {
-    background-color: #fff;
+    background-color: #ece9de;
+        margin-top: 6vh;
+    }
+    
+    #contactContainer {
+        padding-top: 2vh;
+        text-align: center;
+    }
+    
+    #mapButtonContainer {
+        text-align: center;
+        padding-top: 5vh;
+    }
+    
+    .searchBar {
+        background-color: #f9f8f5;
+        height: 30px;
 }
