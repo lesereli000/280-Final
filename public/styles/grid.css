@@ -1,3 +1,4 @@
+/*
 #card {
     display: flex;
     justify-content: center;
@@ -9,5 +10,73 @@
 .card-resources {
     justify-content: right;
     text-align: left;
+
+}
+*/
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#search {
+    background-color: #f9f8f5
+}
+
+.filters {
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Style for the grid container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    grid-gap: 20px; /* Gap between grid items */
+    padding: 20px;
+}
+
+/* Style for the grid item cards */
+.grid-item {
+    align-items: center;
+    justify-content: left;
+    width: 33%;
+}
+
+.card {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #555;
+}
+
+#print {
+    border: 2px solid #246bce;
+    background: #f9f8f5;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
+
+#printBtn {
+    justify-content: right;
+    margin: 5px;
+}
+
+#moreinfo {
+    justify-content: left;
+    margin: 5px;
 
 }
