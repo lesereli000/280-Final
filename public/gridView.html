@@ -10,6 +10,7 @@
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css' integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g==' crossorigin='anonymous'/> 
         <link rel='stylesheet' href="styles/main.css">
         <link rel="stylesheet" href="styles/grid.css">
+        <link rel="stylesheet" media="print" href="styles/print.css">
         <link rel = "icon" type = "image/x-icon" href="images/211.png">
     </head>
     <body>
@@ -27,69 +28,82 @@
                   <input type="text" id="searchBar" placeholder="Search by keyword or name"
                     style="border: none; background-color: #f9f8f5; width: 45vw; padding-left: 15px;">
                 </div>
-              </div>
+            </div>
 
-            <div class="row" id="card">
-                    <div class="card">
+            <div class="filters">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Location
+                  </button>
+
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                  </button>
+
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filters
+                  </button>
+            </div>
+
+              
+              
+              <div class="grid-container">
+                  <div class="grid-item">
+                      <div class="card">
+                        <div class="card-header colorful-header">
+                            
+                          
                         <div class="row" id="cardheader-row">
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="card-title">
+                                   <input type="checkbox" class="card-checkbox" onclick="this.classList.toggle('checked')">
                                     <h5 class="card-title">Library Services</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">by Christian Record</h6>
+                                    <h6 class="card-subtitle mb-2">by Christian Record</h6>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <div class="card-upper-right">
                                     <h6 class="card-resource-basic-info">Open Now: 8am-5pm EDT</h6>
                                     <h6 class="card-resource-basic-info">6.1 miles away</h6>
+            
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="row" id="cardbody-row">
-                            <div class="col-md-4">
+                    </div>
+
+                        <div class="row" id="cardContent">
+                            <div class="col-md-8">
                                 <p class="card-text">Christian Record provides Library Services for legally blind individuals, children and veterans. This program provides:- Access to books and magazines</p>
                             </div>
-                            <div class="col-md-8">
-                                <h6>(555) 555-555</h6>
-                                <h6>Address Here</h6>
-                                <h6>Visit the program's website</h6>
-                                <h6>ADA Compliant/Eligibility</h6>
+                            <div class="col-md-4">
+                                <h6><img src="images/grid view images/phone.png" alt="phone icon" style="height: 20px; width: 20px;">(555) 555-555</h6>
+                                <h6><img src="images/grid view images/locationpin.png" alt="pin icon" style="height: 20px; width: 20px;">7451 Birch Hill Dr.</h6>
+                                <h6 style="text-align: center;"><img src="images/grid view images/globe.png" alt="globe icon" style="height: 20px; width: 20px;">Visit the program's website</h6>
+                                <h6><img src="images/grid view images/checkmark.png" alt="check icon" style="height: 20px; width: 20px;">ADA</h6>
 
-                            </div>
+                            </div>                        
                         </div>
+                        <div class="row" id="buttonRow">
+                           
+                            <button type="button" class="btn btn-primary" id="moreinfo">More Info</button>
+                            <button type="button" class="btn btn-primary" id="printCardBtn">Print</button>
+                        </div>
+                        
+                      </div>
+                  </div>
 
-                    </div>
-                
-                <!-- TODO: implement grid view -->
-                <div class="col-4">
-    <!--Will need to dynamically update card info w/ database-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Library Services</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">by Christian Record</h6>
-                            <p class="card-text">Christian Record provides Library Services for legally blind individuals, children and veterans. This program provides:- Access to books and magazines</p>
-                            <a href="#" class="btn btn-primary" role="button">More Info</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Library Services</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">by Christian Record</h6>
-                            <p class="card-text">Christian Record provides Library Services for legally blind individuals, children and veterans. This program provides:- Access to books and magazines</p>
-                            <a href="#" class="btn btn-primary" role="button">More Info</a>
-                        </div>
-                    </div>
-                </div>
-
-                            
-            </div>
+                  
+                  
+                  <!-- Add more grid items with cards as needed -->
+              </div>
+              
+              
+              
         
             
 
             <a href="mapView.html"><button type="button" class="btn" id="switchView">To Map View</button></a>
+            <a href=""><button type="button" class="btn" id="printSelectBtn">Print Selections</button></a>
+            <a href=""><button type="button" class="btn" id="printAllBtn">Print All</button></a>
 
         </div>
         

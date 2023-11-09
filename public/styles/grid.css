@@ -1,3 +1,4 @@
+/*
 #card {
     display: flex;
     justify-content: center;
@@ -10,4 +11,115 @@
     justify-content: right;
     text-align: left;
 
+}
+*/
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#search {
+    background-color: #f9f8f5
+}
+
+.filters {
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Style for the grid container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    grid-gap: 20px; /* Gap between grid items */
+    padding: 20px;
+}
+
+/* Style for the grid item cards */
+.grid-item {
+    align-items: center;
+    justify-content: left;
+    width: 33%;
+}
+
+.card {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #555;
+}
+
+#print {
+    border: 2px solid #246bce;
+    background: #f9f8f5;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
+
+#printBtn {
+    justify-content: right;
+    margin: 5px;
+}
+
+#moreinfo {
+    justify-content: left;
+    margin: 5px;
+
+}
+
+#printAll {
+    border: 2px solid #246bce;
+    background: #f9f8f5;
+    position: fixed;
+    bottom: 100px;
+    left: 50px;
+}
+
+.colorful-header {
+    background-color: #246bce;
+    color: #ffffff;
+  }
+
+
+  .card-checkbox {
+  display: inline-block; /* or block, depending on your layout */
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.card-checkbox.checked {
+  background-color: #8d8d8d; /* color when it's checked */
+  border-color: #75787b; /* color when it's checked */
+}
+
+.card-checkbox.checked::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
