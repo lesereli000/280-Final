@@ -48,8 +48,8 @@ body {
 }
 
 #searchContainer {
-    padding-left: 1vh;
-    padding-right: 5vw;
+    padding-left: 15vh;
+        padding-right: 15vw;
     margin-right: 0px;
         /* --mdb-gutter-x: 0px; */
         align-self: center;
@@ -61,7 +61,7 @@ body {
 
 .carousel .carousel-item>img {
     height: 45vw;
-    width: 50vw;
+    width: 45vw;
 }
 
 #mapButton>* {
