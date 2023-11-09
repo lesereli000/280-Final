@@ -161,7 +161,19 @@ h2 .accordion-button {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768){
+    #search{
+        width:auto;
+        right:50px;
+    }
+
+    #switchView{
+        position: fixed;
+        top: 250px;
+    }
+}
+
+@media screen and (max-width: 992px) {
     #search {
         transform: none;
         position: fixed;
@@ -194,3 +206,4 @@ h2 .accordion-button {
         width: 30em;
     }
 }
+
