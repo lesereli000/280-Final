@@ -80,3 +80,46 @@
     margin: 5px;
 
 }
+
+#printAll {
+    border: 2px solid #246bce;
+    background: #f9f8f5;
+    position: fixed;
+    bottom: 100px;
+    left: 50px;
+}
+
+.colorful-header {
+    background-color: #246bce;
+    color: #ffffff;
+  }
+
+
+  .card-checkbox {
+  display: inline-block; /* or block, depending on your layout */
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.card-checkbox.checked {
+  background-color: #8d8d8d; /* color when it's checked */
+  border-color: #75787b; /* color when it's checked */
+}
+
+.card-checkbox.checked::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

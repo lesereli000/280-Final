@@ -10,6 +10,7 @@
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css' integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g==' crossorigin='anonymous'/> 
         <link rel='stylesheet' href="styles/main.css">
         <link rel="stylesheet" href="styles/grid.css">
+        <link rel="stylesheet" media="print" href="styles/print.css">
         <link rel = "icon" type = "image/x-icon" href="images/211.png">
     </head>
     <body>
@@ -48,12 +49,15 @@
               <div class="grid-container">
                   <div class="grid-item">
                       <div class="card">
+                        <div class="card-header colorful-header">
+                            
+                          
                         <div class="row" id="cardheader-row">
                             <div class="col-md-7">
                                 <div class="card-title">
-                                    <input type="checkbox" class="card-checkbox">
+                                   <input type="checkbox" class="card-checkbox" onclick="this.classList.toggle('checked')">
                                     <h5 class="card-title">Library Services</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">by Christian Record</h6>
+                                    <h6 class="card-subtitle mb-2">by Christian Record</h6>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -64,23 +68,24 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                         <div class="row" id="cardContent">
                             <div class="col-md-8">
                                 <p class="card-text">Christian Record provides Library Services for legally blind individuals, children and veterans. This program provides:- Access to books and magazines</p>
                             </div>
                             <div class="col-md-4">
-                                <h6>(555) 555-555</h6>
-                                <h6>7451 Birch Hill Dr.</h6>
-                                <h6>Visit the program's website</h6>
-                                <h6>Eligibile</h6>
+                                <h6><img src="images/grid view images/phone.png" alt="phone icon" style="height: 20px; width: 20px;">(555) 555-555</h6>
+                                <h6><img src="images/grid view images/locationpin.png" alt="pin icon" style="height: 20px; width: 20px;">7451 Birch Hill Dr.</h6>
+                                <h6 style="text-align: center;"><img src="images/grid view images/globe.png" alt="globe icon" style="height: 20px; width: 20px;">Visit the program's website</h6>
+                                <h6><img src="images/grid view images/checkmark.png" alt="check icon" style="height: 20px; width: 20px;">ADA</h6>
 
                             </div>                        
                         </div>
                         <div class="row" id="buttonRow">
                            
                             <button type="button" class="btn btn-primary" id="moreinfo">More Info</button>
-                            <button type="button" class="btn btn-primary" id="printBtn">Print</button>
+                            <button type="button" class="btn btn-primary" id="printCardBtn">Print</button>
                         </div>
                         
                       </div>
@@ -97,7 +102,8 @@
             
 
             <a href="mapView.html"><button type="button" class="btn" id="switchView">To Map View</button></a>
-            <a href=""><button type="button" class="btn" id="print">Print Selections</button></a>
+            <a href=""><button type="button" class="btn" id="printSelectBtn">Print Selections</button></a>
+            <a href=""><button type="button" class="btn" id="printAllBtn">Print All</button></a>
 
         </div>
         
