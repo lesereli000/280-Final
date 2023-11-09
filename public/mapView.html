@@ -13,7 +13,6 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css'
     integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g=='
     crossorigin='anonymous' />
-  <link rel='stylesheet' href="styles/main.css">
   <link rel="stylesheet" href="styles/map.css">
   <link rel="icon" type="image/x-icon" href="images/211.png">
 </head>
@@ -26,25 +25,7 @@
 
   <div class="page-container">
 
-    <div id="map">
-      <!-- Note: We may need to or want to implement the google geocoding api 
-          to convert zip code and county information into latitude and longitude -->
-      <script>
-        function newMap() {
-          var mapProp = {
-            // Center and zoom on Terre Haute, Indiana
-            center: new google.maps.LatLng(39.7684, -86.1581),
-            zoom: 11,
-            disableDefaultUI: true,
-          };
-          var map = new google.maps.Map(document.getElementById("map"), mapProp);
-        }
-      </script>
-      <!-- This key is tied to my personal google account and billing. 
-          If this is implemented in a governmental capacity, this will need 
-          to be switched for a key owned and run by the government -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY&callback=newMap"></script>
-    </div>
+    <div id="map"></div>
 
     <div class="accordion card" id="sideMenu">
       <div class="accordion-item">
@@ -337,6 +318,9 @@
     integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw=='
     crossorigin='anonymous'></script>
   <script src="scripts/map.js" async></script>
+  <!-- This key is tied to my personal gmail account ad should be switched if implemented in a professional capacity -->
+  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY", v: "beta"});</script>
 </body>
 
 </html>
