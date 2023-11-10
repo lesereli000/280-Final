@@ -138,15 +138,15 @@ function geocode(zip, county){
     console.log("geocoding");
     let place = "";
     let coords = {lat: 39.7684, lng: -86.1581};
-    // if(zip){
-    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?["postal_code":"${zip}"]`)
-    //     .then();
-    // } else if (county) {
+    if(zip){
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=46142&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then();
+    } else if (county) {
 
-    // } else {
-    //     county = "Marion"
-    //     coords = {lat: 39.7684, lng: -86.1581};
-    // }
+    } else {
+        county = "Marion"
+        coords = {lat: 39.7684, lng: -86.1581};
+    }
     return coords;
 }
 
