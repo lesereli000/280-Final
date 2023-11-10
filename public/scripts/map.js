@@ -202,11 +202,21 @@ cntySearch.addEventListener("click", () => {
 async function getCoords(obj) {
     let coords = "";
 
+    var firstChar = obj.address_1.charAt(0);
+    if (!(firstChar <= '9' && firstChar >= '0')) {
+        coords = { lat: 0, lng: 0 };
+        return coords;
+    }
+
     let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
     let filteredAddress = address.replaceAll(" ", "%20");
+
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
+            if (data.status === "ZERO_RESULTS") {
+                return coords = { lat: 0, lng: 0 }
+            }
             coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
