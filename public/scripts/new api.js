@@ -39,19 +39,11 @@ app.get("/", (request, response) => {
             const range = filters.range;
             delete filters.range;
 
-
-            // console.log("Search: " + search);
-            // console.log("Range: " + range);
-            // console.log("Zipcode: " + zipcode);
-            // console.log("County: " + county);
-
             // TODO: implement search parameter
 
             data = JSON.parse(data)
             const filtered = data.filter(obj => {
                 let valid = true;
-
-                const longLat = getLongLat(obj);
 
                 for (key in filters) {
 
@@ -59,20 +51,33 @@ app.get("/", (request, response) => {
                 }
                 return valid;
             });
-            console.log("filtered");
+            console.log("filtered part 1");
+
+            const filtered2 = filtered.filter(async obj => {
+                let valid = true;
+
+                const coords = await getCoords(obj);
+                obj.longitude = coords.lng;
+                obj.latitude = coords.lat;
+
+                
+ 
+            });
             response.set('Access-Control-Allow-Origin', '*');
             response.send(filtered);
         }
     });
 });
 
-async function getLongLat(obj) {
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=`)
+async function getCoords(obj) {
+    let coords = "";
+
+    let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
+    let filteredAddress = address.replaceAll(" ", "%20");
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
-        
-        })
-        .catch(error => {
-            console.log(error);
-    })
+            coords = { "lat": data.results[0].geometry.location.lat, "lng": data.results[0].geometry.location.lng };
+            return coords;
+        });
 }
