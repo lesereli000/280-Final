@@ -161,41 +161,32 @@ h2 .accordion-button {
     color: white;
 }
 
-@media screen and (max-width: 768){
-    #search{
-        width:auto;
-        right:50px;
-    }
-
-    #switchView{
-        position: fixed;
-        top: 250px;
-    }
-}
-
 @media screen and (max-width: 992px) {
     #search {
         transform: none;
         position: fixed;
-        top: 95px;
-        left: 50px;
+        top: 8vh;
+        left: 5vw;
+        width: 45vw;
+        right: 50vw;
     }
 
     #sideMenu {
         position: fixed;
         width: auto;
         top: auto;
-        right: 50px;
-        left: 50px;
-        bottom: 50px;
-        max-height: 300px;
+        right: 5vw;
+        left: 5vw;
+        bottom: 3vh;
+        max-height: 30vh;
         -ms-transform: none;
         transform: none;
     }
 
     #switchView {
         bottom: none;
-        top: 100px;
+        top: 9vh;
+        right: 5vw;
     } 
 
     .find-btn {
@@ -206,4 +197,3 @@ h2 .accordion-button {
         width: 30em;
     }
 }
-

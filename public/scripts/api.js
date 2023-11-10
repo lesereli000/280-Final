@@ -19,7 +19,7 @@ app.get("/", (request, response) =>{
             const search = filters.search;
             delete filters.search;
 
-
+            // TODO: implement search parameter
 
             data = JSON.parse(data)
             const filtered = data.filter( obj => {
