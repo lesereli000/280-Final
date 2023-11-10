@@ -38,7 +38,6 @@ const headers = document.querySelectorAll(".taxon-header");
 for (const header of headers){
     header.onclick = function(){
         activeFilters = [];
-        // activeFilters = [this.innerHTML];
         console.log(activeFilters);
         for(const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)){
             subcat.classList.remove("active");
@@ -99,10 +98,8 @@ async function findLocations(map){
                     title: location.agency_name,
                 });
 
-                // TODO: put link into popups
-
                 const info = new google.maps.InfoWindow({
-                    content:    `<a href="moreInfo.html/?">
+                    content:    `<a href="moreInfo.html">
                                 <strong>${location.agency_name}</strong>
                                 <br>
                                 <p>${location.taxonomy_name}</p>
