@@ -27,11 +27,6 @@ nav > a > img {
 
 
 
-.filters {
-    padding: 20px;
-    justify-content: center;
-    transform: translateY(30px);
-}
 
 /* Style for the grid container */
 .grid-container {
@@ -39,6 +34,7 @@ nav > a > img {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
     grid-gap: 20px; /* Gap between grid items */
     padding: 20px;
+    transform: translateY(25%);
 }
 
 /* Style for the grid item cards */
@@ -55,6 +51,7 @@ nav > a > img {
     padding: 20px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 0;
 }
 
 .card h2 {
@@ -73,9 +70,11 @@ nav > a > img {
     left: 50px;
 }
 
-#printBtn {
+#printCardBtn {
     justify-content: right;
     margin: 5px;
+    width: 200px;
+
 }
 
 #switchView {
@@ -86,9 +85,10 @@ nav > a > img {
     right: 50px;
 }
 
-#moreinfo {
+#moreInfoBtn {
     justify-content: left;
     margin: 5px;
+    width: 200px;
 
 }
 
@@ -134,3 +134,36 @@ nav > a > img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.taxon-sub-cat-btn.active  {
+    color: #246bce;
+}
+
+
+#servicesAccordion {
+    width: 15%;
+}
+
+#servicesAccordion button {
+    border: none;
+}
+
+
+
+#servicesAccordion .accordion-body{
+    padding: 5px;
+    border: none;
+}
+
+#sideMenu {
+    border: none;
+    position: absolute;
+    width: 15em;
+    background-color: #ffffff;
+    text-align: center;
+    max-height: 700px;
+    z-index: 1;
+    transform: translateY(-10px);
+    
+}
+
