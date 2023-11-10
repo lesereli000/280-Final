@@ -3,21 +3,15 @@ const printSelectBtn = document.getElementById("printSelectBtn");
 const printAllBtn = document.getElementById("printAllBtn");
 
 
-printCardBtn.addEventListener("click", () => {
-    
-    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+let selectedArray = [];
 
-    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title  + '</h1>');
-    mywindow.document.write(document.getElementById(elem).innerHTML);
-    mywindow.document.write('</body></html>');
+function printContent(divId) {
+    var printContents = document.getElementById(divId).innerHTML;
+    var originalContents = document.body.innerHTML;
 
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
+    document.body.innerHTML = printContents;
 
-    mywindow.print();
-    mywindow.close();
+    window.print();
 
-    return true;
-});
+    document.body.innerHTML = originalContents;
+}
