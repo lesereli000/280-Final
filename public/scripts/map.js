@@ -1,5 +1,3 @@
-const { query } = require("express");
-
 const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
 output.innerHTML = `Max Distance: ${slider.value} Miles`;
@@ -65,7 +63,7 @@ async function findLocations(map){
     markers = [];
     let queryString = "";
 
-    queryString += `range=${slider.value}`;
+    queryString += `range=${slider.value}&`;
     
     // TODO: finish query string building
 
@@ -137,10 +135,11 @@ async function initMap(position) {
 
 //TODO: implement
 function geocode(zip, county){
+    console.log("geocoding");
     let place = "";
-    let coords ={lat: 0, lng: 0};
+    let coords = {lat: 39.7684, lng: -86.1581};
     // if(zip){
-    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?["postal_code":""]`)
+    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?["postal_code":"${zip}"]`)
     //     .then();
     // } else if (county) {
 
