@@ -4,17 +4,17 @@ body {
 
 .navbar {
     background-color: #ece9de;
-    --mdb-navbar-box-shadow: 0 0 0 0;
-        position: fixed;
+    position: fixed;
         top: 0;
         width: 100%;
-        height: 6vh;
+    height: 55px;
         z-index: 9;
+    --mdb-navbar-box-shadow: 0 0 0 0;
 }
 
-nav > a > img {
+nav>a>img {
     margin: 0px 20px;
-    height: 3vh;
+    height: 24px;
 }
 
 #switchView {
@@ -162,13 +162,20 @@ h2 .accordion-button {
 }
 
 @media screen and (max-width: 992px) {
+    * {
+            --mdb-body-font-size: 2vh;
+        }
     #search {
         transform: none;
         position: fixed;
-        top: 8vh;
+        top: 65px;
         left: 5vw;
-        width: 45vw;
-        right: 50vw;
+        width: 90vw;
+            height: 6vh;
+            padding-left: 0.35vh;
+            padding-right: 0.35vh;
+            padding-top: 1.2vh;
+            padding-bottom: 1.2vh;
     }
 
     #sideMenu {
@@ -185,7 +192,7 @@ h2 .accordion-button {
 
     #switchView {
         bottom: none;
-        top: 9vh;
+        top: 145px;
         right: 5vw;
     } 
 
