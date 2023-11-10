@@ -60,6 +60,7 @@ countyBox.value = county;
 async function findLocations(map){
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
+    infos = [];
     let queryString = "";
 
     queryString += `range=${slider.value}&`;
@@ -74,21 +75,34 @@ async function findLocations(map){
 
     fetch(`http://localhost:3000/?${queryString}`)
     .then(response => response.json())
-        .then(async data => {
-        console.log(data);
+    .then(async data => {
         for(const location of data){
-            // TODO: create popups
-            // TODO: stop after 2500 pins
             if (location.latitude != null && location.longitude != null) {
                 const coords = await getCoords(location);
                 location.longitude = coords.lng;
                 location.latitude = coords.lat;
 
-                markers.push(new AdvancedMarkerElement({
+                const marker = new AdvancedMarkerElement({
                     map: map,
                     position: {lat: location.latitude, lng: location.longitude},
                     title: location.agency_name,
-                }));
+                });
+
+                // TODO: put content into popups
+
+                const info = new google.maps.InfoWindow({
+                    content: `${infos.length}`,
+                    ariaLabel: location.agency_name,
+                });
+
+                marker.addListener("gmp-click", () => {
+                    info.open({
+                        anchor: marker,
+                        map,
+                    });
+                });
+                markers.push(marker);
+                infos.push(info);
             }
         }
         return markers;
@@ -108,19 +122,17 @@ async function geocode(zip, county){
         });
         return coords;
     } else if (county) {
-        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20IN&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20County%20IN&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
             coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
         });
-        console.log(coords);
         return coords;
     } else {
         county = "Marion"
         coords = {lat: 39.7684, lng: -86.1581};
         return coords;
     }
-    return coords;
 }
 
 let map;
@@ -152,7 +164,6 @@ if(zip || county){
 // add button listeners to re-init map
 const zipSearch = document.getElementById("findZip");
 zipSearch.addEventListener("click", () => {
-    // console.log("zip click");
     zip = zipBox.value;
     county = "";
     countyBox.value = "";
@@ -166,7 +177,6 @@ zipSearch.addEventListener("click", () => {
 
 const cntySearch = document.getElementById("findCounty");
 cntySearch.addEventListener("click", () => {
-    // console.log("county click");
     county = countyBox.value;
     zip = "";
     zipBox.value = "";
