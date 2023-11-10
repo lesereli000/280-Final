@@ -99,10 +99,14 @@ async function findLocations(map){
                     title: location.agency_name,
                 });
 
-                // TODO: put content into popups
+                // TODO: put link into popups
 
                 const info = new google.maps.InfoWindow({
-                    content: `${infos.length}`,
+                    content:    `<a href="moreInfo.html/?">
+                                <strong>${location.agency_name}</strong>
+                                <br>
+                                <p>${location.taxonomy_name}</p>
+                                </a>`,
                     ariaLabel: location.agency_name,
                 });
 
