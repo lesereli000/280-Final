@@ -37,15 +37,19 @@
         </h1>
         <div id="locBody" class="accordion-collapse collapse show" aria-labelledby="locHead" data-bs-parent="#sideMenu">
           <div class="accordion-body">
-            <div style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
+            <div
+              style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
               <button class="find-btn" id="findZip">Find</button>
-              <input type="text" id="zip" placeholder="Zip Code:" style="width: 8em; border-radius: 40px; border: none; padding-left: 10px"><br><br>
+              <input type="text" id="zip" placeholder="Zip Code:"
+                style="width: 8em; border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
             <br>
 
-            <div style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
+            <div
+              style="display: flex; justify-content:space-between; border-radius: 40px; border: 1px solid black; background-color: white;">
               <button class="find-btn" id="findCounty">Find</button>
-              <input type="text" id="county" placeholder="County:" style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
+              <input type="text" id="county" placeholder="County:"
+                style="width: 8em;border-radius: 40px; border: none; padding-left: 10px"><br><br>
             </div>
             <br>
 
@@ -319,8 +323,8 @@
     crossorigin='anonymous'></script>
   <script src="scripts/map.js" async></script>
   <!-- This key is tied to my personal gmail account and should be switched if implemented in a professional capacity -->
-  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-    ({key: "AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0", v: "beta"});</script>
+  <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+      ({ key: "AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0", v: "beta" });</script>
 </body>
 
 </html>

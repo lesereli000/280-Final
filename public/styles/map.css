@@ -5,10 +5,10 @@ body {
 .navbar {
     background-color: #ece9de;
     position: fixed;
-        top: 0;
+    top: 0;
         width: 100%;
     height: 55px;
-        z-index: 9;
+    z-index: 9;
     --mdb-navbar-box-shadow: 0 0 0 0;
 }
 
@@ -42,7 +42,7 @@ nav>a>img {
     border-radius: 10px;
 }
 
-#search{
+#search {
     width: 50vw;
     border: 2px solid #246bce;
     height: 50px;
@@ -84,7 +84,8 @@ h1 .accordion-button {
     background-color: #f9f8f5;
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
     outline: none;
 }
 
@@ -101,7 +102,7 @@ h2 .accordion-button {
     background-color: #f9f8f5;
 }
 
-#servicesAccordion .accordion-body{
+#servicesAccordion .accordion-body {
     padding: 5px;
 }
 
@@ -124,7 +125,7 @@ h2 .accordion-button {
     box-shadow: none;
 }
 
-.taxon-sub-cat-btn.active  {
+.taxon-sub-cat-btn.active {
     color: #246bce;
 }
 
@@ -154,28 +155,26 @@ h2 .accordion-button {
 }
 
 .find-btn {
-    width: 60px; 
-    border-radius: 40px; 
-    border: none; 
-    background-color: #246bce; 
+    width: 60px;
+        border-radius: 40px;
+        border: none;
+        background-color: #246bce;
     color: white;
 }
 
 @media screen and (max-width: 992px) {
     * {
-            --mdb-body-font-size: 2vh;
+        --mdb-body-font-size: 2vh;
         }
+
     #search {
         transform: none;
         position: fixed;
         top: 65px;
         left: 5vw;
         width: 90vw;
-            height: 6vh;
-            padding-left: 0.35vh;
-            padding-right: 0.35vh;
-            padding-top: 1.2vh;
-            padding-bottom: 1.2vh;
+        height: 6vh;
+        padding: 1.2vh 0.35vh;
     }
 
     #sideMenu {
@@ -194,7 +193,7 @@ h2 .accordion-button {
         bottom: none;
         top: 145px;
         right: 5vw;
-    } 
+    }
 
     .find-btn {
         width: 120px;

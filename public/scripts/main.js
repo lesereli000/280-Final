@@ -12,27 +12,27 @@ submitBtn.addEventListener("click", () => {
 
     let URL = mapURL;
 
-    if(zip || county || queries){
+    if (zip || county || queries) {
         URL = URL + "?";
     }
 
-    if(zip){
+    if (zip) {
         URL = URL + "zip=" + zip + "&";
         // TODO: bound input and strip for XSS attacks
+        // TODO: support mutliple zipcodes with commas and put into array
     }
 
-    if(county){
+    if (county) {
         URL = URL + "cty=" + county + "&";
         // TODO: strip for XSS attacks
+        // TODO: support mutliple counties with commas and put into array
     }
 
-    if(queries){
+    if (queries) {
         URL = URL + "q=" + queries;
         // TODO: strip for XSS attacks
+        // TODO: support multiple queries with commas and put into array
     }
 
     window.location.href = URL;
 });
-
-// TODO: figure out how to use url parameters to transfer zip/county between pages
-// ^^ https://www.sitepoint.com/get-url-parameters-with-javascript/ ^^

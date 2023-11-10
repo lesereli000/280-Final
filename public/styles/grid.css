@@ -1,14 +1,16 @@
+/* TODO: Make layout cleaner */
+/* TODO: Mobile view */
 .navbar {
     background-color: #ece9de;
     --mdb-navbar-box-shadow: 0 0 0 0;
-        position: fixed;
+    position: fixed;
         top: 0;
         width: 100%;
         height: 6vh;
         z-index: 9;
 }
 
-nav > a > img {
+nav>a>img {
     margin: 0px 20px;
     height: 3vh;
 }
@@ -32,8 +34,10 @@ nav > a > img {
 /* Style for the grid container */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
-    grid-gap: 20px; /* Gap between grid items */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* Responsive columns */
+        grid-gap: 20px;
+        /* Gap between grid items */
     padding: 20px;
     transform: translateY(25%);
 }
@@ -104,39 +108,42 @@ nav > a > img {
 .colorful-header {
     background-color: #246bce;
     color: #ffffff;
-  }
+}
 
 
-  .card-checkbox {
-  display: inline-block; /* or block, depending on your layout */
-  width: 20px;
-  height: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  cursor: pointer;
+.card-checkbox {
+    display: inline-block;
+        /* or block, depending on your layout */
+        width: 20px;
+        height: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
 }
 
 .card-checkbox.checked {
-  background-color: #8d8d8d; /* color when it's checked */
-  border-color: #75787b; /* color when it's checked */
+    background-color: #8d8d8d;
+        /* color when it's checked */
+        border-color: #75787b;
+        /* color when it's checked */
 }
 
 .card-checkbox.checked::after {
-  content: '';
-  display: block;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    content: '';
+        display: block;
+        width: 5px;
+        height: 10px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 }
 
-.taxon-sub-cat-btn.active  {
+.taxon-sub-cat-btn.active {
     color: #246bce;
 }
 
@@ -151,7 +158,7 @@ nav > a > img {
 
 
 
-#servicesAccordion .accordion-body{
+#servicesAccordion .accordion-body {
     padding: 5px;
     border: none;
 }
@@ -166,6 +173,5 @@ nav > a > img {
     z-index: 1;
     transform: translateY(-100px);
     transform: translateX(50px);
-    
-}
 
+}

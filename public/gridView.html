@@ -1,356 +1,362 @@
+<!-- TODO: Update this with the navbar and footer from the other pages-->
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Indiana 211 Services Grid</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Symbols+Outlined"> -->
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css' integrity='sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==' crossorigin='anonymous'/>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css' integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g==' crossorigin='anonymous'/> 
-        <link rel="stylesheet" href="styles/grid.css">
-        <link rel = "icon" type = "image/x-icon" href="images/211.png">
-    </head>
-    <body>
 
-        <nav class="navbar">
-            <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
-        </nav>
+<head>
+  <meta charset="utf-8">
+  <title>Indiana 211 Services Grid</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Symbols+Outlined"> -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css'
+    integrity='sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ=='
+    crossorigin='anonymous' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css'
+    integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g=='
+    crossorigin='anonymous' />
+  <link rel="stylesheet" href="styles/grid.css">
+  <link rel="icon" type="image/x-icon" href="images/211.png">
+  </head>
 
-        
+<body>
 
-        <div class="page-container">
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Indiana 211 Logo"></a>
+  </nav>
 
-            <div class="card" id="search">
-                <div style="display: flex; justify-content: space-evenly; transform: translateY(-1px);">
-                  <img src="images/search.png" alt="search icon" style="height: 20px; width: 20px; transform: translateY(3px);">
-                  <!-- <div style="height: 30px; width: 2px; background-color: black;"></div> -->
-                  <input type="text" id="searchBar" placeholder="Search by keyword or name"
-                    style="border: none; background-color: #f9f8f5; width: 45vw; padding-left: 15px;">
-                </div>
+
+
+  <div class="page-container">
+
+    <div class="card" id="search">
+      <div style="display: flex; justify-content: space-evenly; transform: translateY(-1px);">
+        <img src="images/search.png" alt="search icon" style="height: 20px; width: 20px; transform: translateY(3px);">
+        <!-- <div style="height: 30px; width: 2px; background-color: black;"></div> -->
+        <input type="text" id="searchBar" placeholder="Search by keyword or name"
+          style="border: none; background-color: #f9f8f5; width: 45vw; padding-left: 15px;">
+      </div>
+    </div>
+
+
+    <div class="accordion card" id="sideMenu">
+    
+      <div class="accordion-item">
+        <h1 class="accordion-header" id="servHead">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servBody"
+            aria-expanded="false" aria-controls="servBody">
+            Services
+          </button>
+        </h1>
+        <div id="servBody" class="accordion-collapse collapse" aria-labelledby="servHead" data-bs-parent="#sideMenu">
+          <div class="accordion-body" id="servCont">
+    
+            <!-- Inner Accordion -->
+            <div class="accordion" id="servicesAccordion">
+    
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="food">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#foodCollapse"
+                    aria-expanded="true" aria-controls="foodCollapse">
+                    Food
+                  </button>
+                  </h2>
+                  <div id="foodCollapse" class="accordion-collapse collapse" aria-labelledby="food" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Emergency Food</button>
+                        <button class="taxon-sub-cat-btn btn">Food Delivery</button>
+                        <button class="taxon-sub-cat-btn btn">Food Pantry</button>
+                        <button class="taxon-sub-cat-btn btn">Help Pay For Food</button>
+                        <button class="taxon-sub-cat-btn btn">Meals</button>
+                        <button class="taxon-sub-cat-btn btn">Nutrition Education</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="housing">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#housingCollapse"
+                    aria-expanded="true" aria-controls="housingCollapse">
+                    Housing
+                  </button>
+                  </h2>
+                  <div id="housingCollapse" class="accordion-collapse collapse" aria-labelledby="housing"
+                    data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Help Find Housing</button>
+                        <button class="taxon-sub-cat-btn btn">Help Pay For Housing</button>
+                        <button class="taxon-sub-cat-btn btn">Housing Advice</button>
+                        <button class="taxon-sub-cat-btn btn">Maintenance and Repairs</button>
+                        <button class="taxon-sub-cat-btn btn">Residential Housing</button>
+                        <button class="taxon-sub-cat-btn btn">Temporary Shelter</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="goods">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#goodsCollapse"
+                    aria-expanded="true" aria-controls="goodsCollapse">
+                    Goods
+                  </button>
+                  </h2>
+                  <div id="goodsCollapse" class="accordion-collapse collapse" aria-labelledby="goods" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body left-align">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Baby Supplies</button>
+                        <button class="taxon-sub-cat-btn btn">Clothing</button>
+                        <button class="taxon-sub-cat-btn btn">Home Goods</button>
+                        <button class="taxon-sub-cat-btn btn">Medical Supplies</button>
+                        <button class="taxon-sub-cat-btn btn">Personal Safety</button>
+                        <button class="taxon-sub-cat-btn btn">Toys & Gifts</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="transit">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#transitCollapse"
+                    aria-expanded="true" aria-controls="transitCollapse">
+                    Transit
+                  </button>
+                  </h2>
+                  <div id="transitCollapse" class="accordion-collapse collapse" aria-labelledby="transit"
+                    data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Help Pay For Transit</button>
+                        <button class="taxon-sub-cat-btn btn">Transportation</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="health">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#healthCollapse"
+                    aria-expanded="true" aria-controls="healthCollapse">
+                    Health
+                  </button>
+                  </h2>
+                  <div id="healthCollapse" class="accordion-collapse collapse" aria-labelledby="health"
+                    data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Addiction & Recovery</button>
+                        <button class="taxon-sub-cat-btn btn">Dental Care</button>
+                        <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
+                        <button class="taxon-sub-cat-btn btn">Health Education</button>
+                        <button class="taxon-sub-cat-btn btn">Help Pay For Healthcare</button>
+                        <button class="taxon-sub-cat-btn btn">Medical Care</button>
+                        <button class="taxon-sub-cat-btn btn">Mental Health Care</button>
+                        <button class="taxon-sub-cat-btn btn">Sexual And Reproductive Health</button>
+                        <button class="taxon-sub-cat-btn btn">Vision Care</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="money">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#moneyCollapse"
+                    aria-expanded="true" aria-controls="moneyCollapse">
+                    Money
+                  </button>
+                  </h2>
+                  <div id="moneyCollapse" class="accordion-collapse collapse" aria-labelledby="money" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Financial Assistance</button>
+                        <button class="taxon-sub-cat-btn btn">Financial Education</button>
+                        <button class="taxon-sub-cat-btn btn">Government Benefits</button>
+                        <button class="taxon-sub-cat-btn btn">Insurance</button>
+                        <button class="taxon-sub-cat-btn btn">Loans</button>
+                        <button class="taxon-sub-cat-btn btn">Tax Preparation</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="care">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#careCollapse"
+                    aria-expanded="true" aria-controls="careCollapse">
+                    Care
+                  </button>
+                  </h2>
+                  <div id="careCollapse" class="accordion-collapse collapse" aria-labelledby="care" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Adoption & Foster Care</button>
+                        <button class="taxon-sub-cat-btn btn">Animal Welfare</button>
+                        <button class="taxon-sub-cat-btn btn">Community Support Services</button>
+                        <button class="taxon-sub-cat-btn btn">Daytime Care</button>
+                        <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
+                        <button class="taxon-sub-cat-btn btn">Navigating The System</button>
+                        <button class="taxon-sub-cat-btn btn">Physical Safety</button>
+                        <button class="taxon-sub-cat-btn btn">Residential Care</button>
+                        <button class="taxon-sub-cat-btn btn">Support Network</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="edu">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#eduCollapse"
+                    aria-expanded="true" aria-controls="eduCollapse">
+                    Education
+                  </button>
+                  </h2>
+                  <div id="eduCollapse" class="accordion-collapse collapse" aria-labelledby="edu" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Help Find School</button>
+                        <button class="taxon-sub-cat-btn btn">Help Pay For School</button>
+                        <button class="taxon-sub-cat-btn btn">More Education</button>
+                        <button class="taxon-sub-cat-btn btn">Preschool</button>
+                        <button class="taxon-sub-cat-btn btn">Screening & Exams</button>
+                        <button class="taxon-sub-cat-btn btn">Skills & Training</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="work">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#workCollapse"
+                    aria-expanded="true" aria-controls="workCollapse">
+                    Work
+                  </button>
+                  </h2>
+                  <div id="workCollapse" class="accordion-collapse collapse" aria-labelledby="work" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Help Find Work</button>
+                        <button class="taxon-sub-cat-btn btn">Help Pay For Work Expenses</button>
+                        <button class="taxon-sub-cat-btn btn">Skills & Training</button>
+                        <button class="taxon-sub-cat-btn btn">Supported Employment</button>
+                        <button class="taxon-sub-cat-btn btn">Workplace Rights</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="legal">
+                  <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#legalCollapse"
+                    aria-expanded="true" aria-controls="legalCollapse">
+                    Legal
+                  </button>
+                  </h2>
+                  <div id="legalCollapse" class="accordion-collapse collapse" aria-labelledby="legal" data-bs-parent="#servicesAccordion">
+                    <div class="accordion-body">
+                      <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
+                        <button class="taxon-sub-cat-btn btn">Advocacy & Legal Aid</button>
+                        <button class="taxon-sub-cat-btn btn">Mediation</button>
+                        <button class="taxon-sub-cat-btn btn">Notary</button>
+                        <button class="taxon-sub-cat-btn btn">Representation</button>
+                        <button class="taxon-sub-cat-btn btn">Translation & Interpretation</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                  <!-- End Inner Accordion -->
+                  
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+
+<div class="grid-container" id="allCards">
+  <div class="grid-item">
+    <div class="card">
+      <div class="card-header colorful-header">
+
+
+        <div class="row" id="cardheader-row">
+          <div class="col-md-7">
+            <div class="card-title">
+              <input type="checkbox" class="card-checkbox" onclick="this.classList.toggle('checked')">
+              <h5 class="card-title">Library Services</h5>
+              <h6 class="card-subtitle mb-2">by Christian Record</h6>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="card-upper-right">
+              <h6 class="card-resource-basic-info">Open Now: 8am-5pm EDT</h6>
+              <h6 class="card-resource-basic-info">6.1 miles away</h6>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+          <div class="row" id="cardContent">
+            <div class="col-md-8">
+              <p class="card-text">Christian Record provides Library Services for legally blind individuals, children
+                and veterans. This program provides:- Access to books and magazines</p>
+              </div>
+              <div class="col-md-4">
+              <h6><img src="images/grid view images/phone.png" alt="phone icon" style="height: 20px; width: 20px;">(555)
+                555-555</h6>
+              <h6><img src="images/grid view images/locationpin.png" alt="pin icon" style="height: 20px; width: 20px;">7451 Birch Hill
+                Dr.</h6>
+              <h6 style="text-align: center;"><img src="images/grid view images/globe.png" alt="globe icon"
+                  style="height: 20px; width: 20px;">Visit the program's website</h6>
+              <h6><img src="images/grid view images/checkmark.png" alt="check icon" style="height: 20px; width: 20px;">ADA</h6>
+
+            </div>
+            </div>
+            <div class="row" id="buttonRow">
+            
+              <div class="col-6">
+              <a href="moreInfo.html"><button type="button" class="btn btn-primary" id="moreInfoBtn">More
+                  Info</button></a>
+
+            </div>
+            <div class="col-6">
+              <!--<button type="button" class="btn btn-primary" id="printCardBtn">Print</button>-->
+              <a href="moreInfo.html"><button type="button" class="btn btn-primary" id="printCardBtn">Print</button></a>
+
+
             </div>
 
+          </div>
+          
+          </div>
+          
+          </div>
+          <!-- Add more grid items with cards as needed -->
+          </div>
 
-            <div class="accordion card" id="sideMenu">
-                      
-                <div class="accordion-item">
-                  <h1 class="accordion-header" id="servHead">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#servBody"
-                      aria-expanded="false" aria-controls="servBody">
-                      Services
-                    </button>
-                  </h1>
-                  <div id="servBody" class="accordion-collapse collapse" aria-labelledby="servHead" data-bs-parent="#sideMenu">
-                    <div class="accordion-body" id="servCont">
-          
-                      <!-- Inner Accordion -->
-                      <div class="accordion" id="servicesAccordion">
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="food">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#foodCollapse"
-                              aria-expanded="true" aria-controls="foodCollapse">
-                              Food
-                            </button>
-                          </h2>
-                          <div id="foodCollapse" class="accordion-collapse collapse" aria-labelledby="food"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Emergency Food</button>
-                                <button class="taxon-sub-cat-btn btn">Food Delivery</button>
-                                <button class="taxon-sub-cat-btn btn">Food Pantry</button>
-                                <button class="taxon-sub-cat-btn btn">Help Pay For Food</button>
-                                <button class="taxon-sub-cat-btn btn">Meals</button>
-                                <button class="taxon-sub-cat-btn btn">Nutrition Education</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="housing">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#housingCollapse"
-                              aria-expanded="true" aria-controls="housingCollapse">
-                              Housing
-                            </button>
-                          </h2>
-                          <div id="housingCollapse" class="accordion-collapse collapse" aria-labelledby="housing"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Help Find Housing</button>
-                                <button class="taxon-sub-cat-btn btn">Help Pay For Housing</button>
-                                <button class="taxon-sub-cat-btn btn">Housing Advice</button>
-                                <button class="taxon-sub-cat-btn btn">Maintenance and Repairs</button>
-                                <button class="taxon-sub-cat-btn btn">Residential Housing</button>
-                                <button class="taxon-sub-cat-btn btn">Temporary Shelter</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="goods">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#goodsCollapse"
-                              aria-expanded="true" aria-controls="goodsCollapse">
-                              Goods
-                            </button>
-                          </h2>
-                          <div id="goodsCollapse" class="accordion-collapse collapse" aria-labelledby="goods"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body left-align">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Baby Supplies</button>
-                                <button class="taxon-sub-cat-btn btn">Clothing</button>
-                                <button class="taxon-sub-cat-btn btn">Home Goods</button>
-                                <button class="taxon-sub-cat-btn btn">Medical Supplies</button>
-                                <button class="taxon-sub-cat-btn btn">Personal Safety</button>
-                                <button class="taxon-sub-cat-btn btn">Toys & Gifts</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="transit">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#transitCollapse"
-                              aria-expanded="true" aria-controls="transitCollapse">
-                              Transit
-                            </button>
-                          </h2>
-                          <div id="transitCollapse" class="accordion-collapse collapse" aria-labelledby="transit"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Help Pay For Transit</button>
-                                <button class="taxon-sub-cat-btn btn">Transportation</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="health">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#healthCollapse"
-                              aria-expanded="true" aria-controls="healthCollapse">
-                              Health
-                            </button>
-                          </h2>
-                          <div id="healthCollapse" class="accordion-collapse collapse" aria-labelledby="health"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Addiction & Recovery</button>
-                                <button class="taxon-sub-cat-btn btn">Dental Care</button>
-                                <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
-                                <button class="taxon-sub-cat-btn btn">Health Education</button>
-                                <button class="taxon-sub-cat-btn btn">Help Pay For Healthcare</button>
-                                <button class="taxon-sub-cat-btn btn">Medical Care</button>
-                                <button class="taxon-sub-cat-btn btn">Mental Health Care</button>
-                                <button class="taxon-sub-cat-btn btn">Sexual And Reproductive Health</button>
-                                <button class="taxon-sub-cat-btn btn">Vision Care</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="money">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#moneyCollapse"
-                              aria-expanded="true" aria-controls="moneyCollapse">
-                              Money
-                            </button>
-                          </h2>
-                          <div id="moneyCollapse" class="accordion-collapse collapse" aria-labelledby="money"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Financial Assistance</button>
-                                <button class="taxon-sub-cat-btn btn">Financial Education</button>
-                                <button class="taxon-sub-cat-btn btn">Government Benefits</button>
-                                <button class="taxon-sub-cat-btn btn">Insurance</button>
-                                <button class="taxon-sub-cat-btn btn">Loans</button>
-                                <button class="taxon-sub-cat-btn btn">Tax Preparation</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="care">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#careCollapse"
-                              aria-expanded="true" aria-controls="careCollapse">
-                              Care
-                            </button>
-                          </h2>
-                          <div id="careCollapse" class="accordion-collapse collapse" aria-labelledby="care"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Adoption & Foster Care</button>
-                                <button class="taxon-sub-cat-btn btn">Animal Welfare</button>
-                                <button class="taxon-sub-cat-btn btn">Community Support Services</button>
-                                <button class="taxon-sub-cat-btn btn">Daytime Care</button>
-                                <button class="taxon-sub-cat-btn btn">End-Of-Life Care</button>
-                                <button class="taxon-sub-cat-btn btn">Navigating The System</button>
-                                <button class="taxon-sub-cat-btn btn">Physical Safety</button>
-                                <button class="taxon-sub-cat-btn btn">Residential Care</button>
-                                <button class="taxon-sub-cat-btn btn">Support Network</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="edu">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#eduCollapse"
-                              aria-expanded="true" aria-controls="eduCollapse">
-                              Education
-                            </button>
-                          </h2>
-                          <div id="eduCollapse" class="accordion-collapse collapse" aria-labelledby="edu"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Help Find School</button>
-                                <button class="taxon-sub-cat-btn btn">Help Pay For School</button>
-                                <button class="taxon-sub-cat-btn btn">More Education</button>
-                                <button class="taxon-sub-cat-btn btn">Preschool</button>
-                                <button class="taxon-sub-cat-btn btn">Screening & Exams</button>
-                                <button class="taxon-sub-cat-btn btn">Skills & Training</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="work">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#workCollapse"
-                              aria-expanded="true" aria-controls="workCollapse">
-                              Work
-                            </button>
-                          </h2>
-                          <div id="workCollapse" class="accordion-collapse collapse" aria-labelledby="work"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Help Find Work</button>
-                                <button class="taxon-sub-cat-btn btn">Help Pay For Work Expenses</button>
-                                <button class="taxon-sub-cat-btn btn">Skills & Training</button>
-                                <button class="taxon-sub-cat-btn btn">Supported Employment</button>
-                                <button class="taxon-sub-cat-btn btn">Workplace Rights</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="legal">
-                            <button class="accordion-button taxon-header" type="button" data-bs-toggle="collapse" data-bs-target="#legalCollapse"
-                              aria-expanded="true" aria-controls="legalCollapse">
-                              Legal
-                            </button>
-                          </h2>
-                          <div id="legalCollapse" class="accordion-collapse collapse" aria-labelledby="legal"
-                            data-bs-parent="#servicesAccordion">
-                            <div class="accordion-body">
-                              <div class="btn-group-vertical" data-toggle="buttons-radio" class="taxon-sub-cat">
-                                <button class="taxon-sub-cat-btn btn">Advocacy & Legal Aid</button>
-                                <button class="taxon-sub-cat-btn btn">Mediation</button>
-                                <button class="taxon-sub-cat-btn btn">Notary</button>
-                                <button class="taxon-sub-cat-btn btn">Representation</button>
-                                <button class="taxon-sub-cat-btn btn">Translation & Interpretation</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- End Inner Accordion -->
-          
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div class="container">
 
-              
-              
-              <div class="grid-container" id="allCards">
-                  <div class="grid-item">
-                      <div class="card">
-                        <div class="card-header colorful-header">
-                            
-                          
-                        <div class="row" id="cardheader-row">
-                            <div class="col-md-7">
-                                <div class="card-title">
-                                   <input type="checkbox" class="card-checkbox" onclick="this.classList.toggle('checked')">
-                                    <h5 class="card-title">Library Services</h5>
-                                    <h6 class="card-subtitle mb-2">by Christian Record</h6>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="card-upper-right">
-                                    <h6 class="card-resource-basic-info">Open Now: 8am-5pm EDT</h6>
-                                    <h6 class="card-resource-basic-info">6.1 miles away</h6>
-            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="row" id="cardContent">
-                            <div class="col-md-8">
-                                <p class="card-text">Christian Record provides Library Services for legally blind individuals, children and veterans. This program provides:- Access to books and magazines</p>
-                            </div>
-                            <div class="col-md-4">
-                                <h6><img src="images/grid view images/phone.png" alt="phone icon" style="height: 20px; width: 20px;">(555) 555-555</h6>
-                                <h6><img src="images/grid view images/locationpin.png" alt="pin icon" style="height: 20px; width: 20px;">7451 Birch Hill Dr.</h6>
-                                <h6 style="text-align: center;"><img src="images/grid view images/globe.png" alt="globe icon" style="height: 20px; width: 20px;">Visit the program's website</h6>
-                                <h6><img src="images/grid view images/checkmark.png" alt="check icon" style="height: 20px; width: 20px;">ADA</h6>
-
-                            </div>                        
-                        </div>
-                        <div class="row" id="buttonRow">
-                           
-                            <div class="col-6">
-                                <a href="moreInfo.html"><button type="button" class="btn btn-primary" id="moreInfoBtn">More Info</button></a>
-
-                            </div>
-                            <div class="col-6">
-                                <!--<button type="button" class="btn btn-primary" id="printCardBtn">Print</button>-->
-                                <a href="moreInfo.html"><button type="button" class="btn btn-primary" id="printCardBtn">Print</button></a>
+    </div>
 
 
-                            </div>
+    <a href="mapView.html"><button type="button" class="btn" id="switchView">To Map View</button></a>
+    <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printSelectBtn">Print
+        Selections</button></a>
+    <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printAllBtn">Print
+        All</button></a>
 
-                        </div>
-                        
-                      </div>
-                       
-                  </div>
-                  <!-- Add more grid items with cards as needed -->
-              </div>
+  </div>
 
-              <div class="container">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js'
+    integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw=='
+    crossorigin='anonymous'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js'
+    integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw=='
+    crossorigin='anonymous'></script>
+  <script src="scripts/grid.js" async defer></script>
+  
+  </body>
 
-              </div>
-          
-              
-              
-              
-        
-            
-
-            <a href="mapView.html"><button type="button" class="btn" id="switchView">To Map View</button></a>
-            <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printSelectBtn">Print Selections</button></a>
-            <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printAllBtn">Print All</button></a>
-
-        </div>
-        
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js' integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw==' crossorigin='anonymous'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js' integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw==' crossorigin='anonymous'></script>
-        <script src="scripts/grid.js" async defer></script>
-        
-    </body>
 </html>

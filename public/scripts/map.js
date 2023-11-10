@@ -2,7 +2,7 @@ const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
 output.innerHTML = `Max Distance: ${slider.value} Miles`;
 
-slider.oninput = function(){
+slider.oninput = function () {
     output.innerHTML = `Max Distance: ${this.value} Miles`;
 }
 
@@ -10,20 +10,21 @@ const subcats = document.querySelectorAll(".taxon-sub-cat-btn");
 
 let activeFilters = [];
 
-function cleanArray(array){
+function cleanArray(array) {
     let newArr = [];
-    for( const val of array){
-        if (val != undefined){
+    for (const val of array) {
+        if (val != undefined) {
             newArr.push(val);
         }
     }
     return newArr;
 }
 
-for (const subcat of subcats){
-    subcat.onclick = function() {
+for (const subcat of subcats) {
+    // TODO: Make this support clicking larger section select all (ie. Food)
+    subcat.onclick = function () {
         this.classList.toggle("active");
-        if (this.classList.contains("active")){
+        if (this.classList.contains("active")) {
             activeFilters.push(this.textContent);
         } else {
             activeFilters[activeFilters.indexOf(this.textContent)] = undefined;
@@ -35,11 +36,11 @@ for (const subcat of subcats){
 
 const headers = document.querySelectorAll(".taxon-header");
 
-for (const header of headers){
-    header.onclick = function(){
+for (const header of headers) {
+    header.onclick = function () {
         activeFilters = [];
         console.log(activeFilters);
-        for(const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)){
+        for (const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)) {
             subcat.classList.remove("active");
         }
     };
@@ -59,83 +60,91 @@ countyBox.value = county;
 
 const search = document.getElementById("searchBar");
 
-async function findLocations(map){
+async function findLocations(map) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
     infos = [];
     let queryString = "";
 
     queryString += `range=${slider.value}&`;
-    
-    if(activeFilters.length != 0){
+
+    if (activeFilters.length != 0) {
         queryString += `filters=[${activeFilters}]&`
     }
 
-    if(search.value){
+    if (search.value) {
+    // TODO: strip for XSS attacks (see main.js)
+    // TODO: support multiple queries with commas and put into array (see main.js)
         queryString += `search=${search.value}`;
     }
 
     console.log(queryString);
 
-    if(zip){
+    if (zip) {
+    // TODO: bound input and strip for XSS attacks (see main.js)
+    // TODO: support mutliple zipcodes with commas and put into array (see main.js)
+    // TODO: Update searching near: 
         queryString += `zipcode=${zip}`;
     } else if (county) {
+        // TODO: strip for XSS attacks (see main.js)
+        // TODO: support mutliple counties with commas and put into array (see main.js)
+        // TODO: Update searching near:
         queryString += `county=${county}`;
     }
 
     fetch(`http://localhost:3000/?${queryString}`)
-    .then(response => response.json())
-    .then(async data => {
-        for(const location of data){
-            if (location.latitude != null && location.longitude != null) {
-                const coords = await getCoords(location);
-                location.longitude = coords.lng;
-                location.latitude = coords.lat;
+        .then(response => response.json())
+        .then(async data => {
+            for (const location of data) {
+                if (location.latitude != null && location.longitude != null) {
+                    const coords = await getCoords(location);
+                    location.longitude = coords.lng;
+                    location.latitude = coords.lat;
 
-                const marker = new AdvancedMarkerElement({
-                    map: map,
-                    position: {lat: location.latitude, lng: location.longitude},
-                    title: location.agency_name,
-                });
+                    const marker = new AdvancedMarkerElement({
+                        map: map,
+                        position: { lat: location.latitude, lng: location.longitude },
+                        title: location.agency_name,
+                    });
 
-                const info = new google.maps.InfoWindow({
-                    content:    `<a href="moreInfo.html">
+                    const info = new google.maps.InfoWindow({
+                        content: `<a href="moreInfo.html">
                                 <strong>${location.agency_name}</strong>
                                 <br>
                                 <p>${location.taxonomy_name}</p>
                                 </a>`,
-                    ariaLabel: location.agency_name,
-                });
-
-                marker.addListener("gmp-click", () => {
-                    info.open({
-                        anchor: marker,
-                        map,
+                        ariaLabel: location.agency_name,
                     });
-                });
-                markers.push(marker);
-                infos.push(info);
+
+                    marker.addListener("gmp-click", () => {
+                        info.open({
+                            anchor: marker,
+                            map,
+                        });
+                    });
+                    markers.push(marker);
+                    infos.push(info);
+                }
             }
-        }
-        return markers;
-    })
-    .catch(error =>{
-        console.error(error);
-    });
+            return markers;
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
-async function geocode(zip, county){
-    let coords = {lat: 39.7684, lng: -86.1581};
-    if(zip){
+async function geocode(zip, county) {
+    let coords = { lat: 39.7684, lng: -86.1581 };
+    if (zip) {
         await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
-        .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
                 if (data.status === "ZERO_RESULTS") {
                     return coords = { lat: 0, lng: 0 }
                 }
                 console.log(zip);
-            coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
-        });
+                coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+            });
         return coords;
     } else if (county) {
         await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20County%20IN&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
@@ -149,7 +158,7 @@ async function geocode(zip, county){
         return coords;
     } else {
         county = "Marion"
-        coords = {lat: 39.7684, lng: -86.1581};
+        coords = { lat: 39.7684, lng: -86.1581 };
         return coords;
     }
 }
@@ -158,22 +167,22 @@ let map;
 
 async function initMap() {
 
-  const { Map } = await google.maps.importLibrary("maps");
+    const { Map } = await google.maps.importLibrary("maps");
 
-  position = await geocode(zip,county);
+    position = await geocode(zip, county);
 
-  map = new Map(document.getElementById("map"), {
-    mapId: '115c56c4cc9092d4',
-    zoom: 11,
-    center: position,
-    disableDefaultUI: true,
-  });
+    map = new Map(document.getElementById("map"), {
+        mapId: '115c56c4cc9092d4',
+        zoom: 11,
+        center: position,
+        disableDefaultUI: true,
+    });
 
-  const markers = findLocations(map);
+    const markers = findLocations(map);
 }
 
 // default to Marion County (Indianapolis)
-if(zip || county){
+if (zip || county) {
     initMap();
 } else {
     county = "Marion"
@@ -187,9 +196,9 @@ zipSearch.addEventListener("click", () => {
     county = "";
     countyBox.value = "";
     // only update map if we know what county to look at
-    if(zip) {
+    if (zip) {
         // geocode and re init map
-        let coords = geocode(zip,county);
+        let coords = geocode(zip, county);
         initMap(coords);
     }
 });
@@ -200,9 +209,9 @@ cntySearch.addEventListener("click", () => {
     zip = "";
     zipBox.value = "";
     // only update map if we know what county to look at
-    if(county) {
+    if (county) {
         // geocode and re init map
-        let coords = geocode(zip,county);
+        let coords = geocode(zip, county);
         initMap(coords);
     }
 });

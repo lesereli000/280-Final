@@ -12,6 +12,7 @@ app.listen(port, () => {
 let zipcode = 0;
 let county = "";
 
+// TODO: Show a loading icon when waiting for this request
 app.get("/", async (request, response) => {
     fs.readFile(dataPath, async (err, data) => {
         if (err) {
@@ -24,6 +25,8 @@ app.get("/", async (request, response) => {
 
             zipcode = filters.zipcode;
             county = filters.county;
+            // TODO: Support multiple of both of those
+            // TODO: Support current location
 
             const activeFilters = filters.filters;
             delete filters.filters;
@@ -32,8 +35,6 @@ app.get("/", async (request, response) => {
 
             const range = Number(filters.range);
             delete filters.range;
-
-            // TODO: implement search parameter
 
             data = JSON.parse(data)
             const filtered = data.filter(obj => {
@@ -45,6 +46,7 @@ app.get("/", async (request, response) => {
                 return valid;
             });
 
+            // TODO: Make range include some in other counties that are close
             const filtered2 = await Promise.all(filtered.map(async obj => {
                 let valid = true;
 
@@ -60,6 +62,9 @@ app.get("/", async (request, response) => {
                 }
                 return distance <= range;
             }));
+
+            // TODO: implement search parameter
+            // TODO: Stack resources on top of each other so it's possible to see them all
 
             const finalFiltered = filtered.filter((_, index) => filtered2[index]);
 

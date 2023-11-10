@@ -1,3 +1,6 @@
+/* TODO: Put location pin data in cards */
+/* TODO: Display created cards */
+
 const printCardBtn = document.getElementById("printCardBtn");
 const printSelectBtn = document.getElementById("printSelectBtn");
 const printAllBtn = document.getElementById("printAllBtn");
