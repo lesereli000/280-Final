@@ -130,28 +130,34 @@ async function initMap(position) {
     disableDefaultUI: true,
   });
 
-  const markers = findLocations(map);
+//   const markers = findLocations(map);
 }
 
 //TODO: implement
 function geocode(zip, county){
     console.log("geocoding");
-    let place = "";
     let coords = {lat: 39.7684, lng: -86.1581};
     if(zip){
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=46142&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
-        .then();
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then(response => response.json())
+        .then(data => {
+            coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
+            console.log(coords);
+            return coords;
+        });
     } else if (county) {
 
     } else {
         county = "Marion"
         coords = {lat: 39.7684, lng: -86.1581};
+        return coords;
     }
-    return coords;
+    // return coords;
 }
 
 if(zip || county){
     let coords = geocode(zip, county);
+    console.log("first map");
     initMap(coords);
 } else {
     county = "Marion"
