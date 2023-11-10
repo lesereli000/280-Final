@@ -74,12 +74,16 @@ async function findLocations(map){
 
     fetch(`http://localhost:3000/?${queryString}`)
     .then(response => response.json())
-    .then(data =>{
+        .then(async data => {
         console.log(data);
         for(const location of data){
             // TODO: create popups
             // TODO: stop after 2500 pins
-            if(location.latitude != null && location.longitude != null){
+            if (location.latitude != null && location.longitude != null) {
+                const coords = await getCoords(location);
+                location.longitude = coords.lng;
+                location.latitude = coords.lat;
+
                 markers.push(new AdvancedMarkerElement({
                     map: map,
                     position: {lat: location.latitude, lng: location.longitude},
@@ -173,3 +177,16 @@ cntySearch.addEventListener("click", () => {
         initMap(coords);
     }
 });
+
+async function getCoords(obj) {
+    let coords = "";
+
+    let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
+    let filteredAddress = address.replaceAll(" ", "%20");
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then(response => response.json())
+        .then(data => {
+            coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+            return coords;
+        });
+}
