@@ -108,7 +108,7 @@ async function geocode(zip, county){
         });
         return coords;
     } else if (county) {
-        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20IN&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
             coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
