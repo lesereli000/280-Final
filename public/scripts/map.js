@@ -37,7 +37,8 @@ const headers = document.querySelectorAll(".taxon-header");
 
 for (const header of headers){
     header.onclick = function(){
-        activeFilters = [this.innerHTML];
+        activeFilters = [];
+        // activeFilters = [this.innerHTML];
         console.log(activeFilters);
         for(const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)){
             subcat.classList.remove("active");
@@ -57,6 +58,8 @@ zipBox.value = zip;
 let county = urlParams.get('cty');
 countyBox.value = county;
 
+const search = document.getElementById("searchBar");
+
 async function findLocations(map){
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
@@ -65,7 +68,15 @@ async function findLocations(map){
 
     queryString += `range=${slider.value}&`;
     
-    // TODO: finish query string building
+    if(activeFilters.length != 0){
+        queryString += `filters=[${activeFilters}]&`
+    }
+
+    if(search.value){
+        queryString += `search=${search.value}`;
+    }
+
+    console.log(queryString);
 
     if(zip){
         queryString += `zipcode=${zip}`;
