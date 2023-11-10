@@ -10,7 +10,7 @@ body {
     top: 0;
     width: 100%;
     height: 55px;
-        z-index: 9;
+    z-index: 9;
     --mdb-navbar-box-shadow: 0 0 0 0;
 }
 
@@ -28,9 +28,9 @@ nav>a>img {
     margin-top: 55px;
     background-image: radial-gradient(#000 10%, transparent 11%),
         radial-gradient(#000 10%, transparent 11%);
-            background-size: 10px 10px;
-            background-position: 0 0, 30px 30px;
-            background-repeat: repeat;
+    background-size: 10px 10px;
+    background-position: 0 0, 30px 30px;
+    background-repeat: repeat;
 }
 
 .col-lg-6 {
@@ -179,56 +179,57 @@ footer>div>div>*>a {
         width: 100vw;
     }
 
-        .carousel-inner {
-            width: 100vw;
-        }
+    .carousel-inner {
+        width: 100vw;
+    }
 
-        #searchContainer {
+    #searchContainer {
         margin: 5vh 30vw;
-            padding: 15px 15px;
-            width: 90vw;
-        }
+        padding: 15px 15px;
+        width: 90vw;
+    }
 
-        .searchBar>div>input {
-            width: 80vw;
-        }
+    .searchBar>div>input {
+        width: 80vw;
+    }
 
-        #mapButton {
-            width: 80vw;
-        }
-        .news>div {
+    #mapButton {
+        width: 80vw;
+    }
+
+    .news>div {
         margin: 2vh 0;
         width: 85vw;
-    
+    }
 
-        .news {
+    .news {
         margin-bottom: 0;
     }
 
-        #rightNews {
-            margin-bottom: 0;
+    #rightNews {
+        margin-bottom: 0;
     }
 
-        #rightNews .topCard {
-            margin-top: 0;
-        }
-
-        .footerPadding {
-            padding: 0 5vw;
+    #rightNews .topCard {
+        margin-top: 0;
     }
 
-        #contactContainer>a>button {
-            width: 85vw;
-        }
+    .footerPadding {
+        padding: 0 5vw;
+    }
 
-        .card {
-            flex-direction: column;
-        }
+    #contactContainer>a>button {
+        width: 85vw;
+    }
 
-        .card>img {
-            width: auto;
-            height: auto;
+    .card {
+        flex-direction: column;
+    }
+
+    .card>img {
+        width: auto;
+        height: auto;
         border-bottom-left-radius: 0;
-            border-top-right-radius: var(--mdb-card-inner-border-radius);
-        }
+        border-top-right-radius: var(--mdb-card-inner-border-radius);
+    }
 }
