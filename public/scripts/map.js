@@ -57,31 +57,29 @@ zipBox.value = zip;
 let county = urlParams.get('cty');
 countyBox.value = county;
 
-// function geocode(){
-
-//     coords = {lat: , lng:};
-//     return coords
-// }
-
-// if(zip || county){
-//     let coords = geocode();
-//     initMap(coords)
-// }
-
 // include county/zip/filter options in this method
 async function findLocations(map){
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    
     markers = [];
+    let queryString = "";
+    
+    // TODO: finish query string building
 
-    fetch('http://localhost:3000/?county=Vigo')
+    if(zip){
+        queryString += `zipcode=${zip}`;
+    } else if (county) {
+        queryString += `county=${county}`;
+    }
+
+
+    fetch(`https://in211.scanurag.com/resourcesData/Marion.json`)
+    // fetch(`http://localhost:3000/?${queryString}`)
     .then(response => response.json())
     .then(data =>{
-        console.log(data)
-        // data = JSON.parse(data);
+        console.log(data);
         for(const location of data){
-            console.log(`new location: ${location.agency_id}`);
-            console.log(`{lat: ${location.latitude}, lng: ${location.longitude}}`);
+            // TODO: create popups
+            // TODO: stop after 2500 pins
             if(location.latitude != null && location.longitude != null){
                 markers.push(new AdvancedMarkerElement({
                     map: map,
@@ -95,6 +93,27 @@ async function findLocations(map){
     .catch(error =>{
         console.error(error);
     });
+
+    // fetch(`http://localhost:3000/?${queryString}`)
+    // .then(response => response.json())
+    // .then(data =>{
+    //     console.log(data);
+    //     for(const location of data){
+    //         // TODO: create popups
+    //         // TODO: stop after 2500 pins
+    //         if(location.latitude != null && location.longitude != null){
+    //             markers.push(new AdvancedMarkerElement({
+    //                 map: map,
+    //                 position: {lat: location.latitude, lng: location.longitude},
+    //                 title: location.agency_name,
+    //             }));
+    //         }
+    //     }
+    //     return markers;
+    // })
+    // .catch(error =>{
+    //     console.error(error);
+    // });
 }
 
 let map;
@@ -111,17 +130,42 @@ async function initMap(position) {
   });
 
   const markers = findLocations(map);
-//   const marker = new AdvancedMarkerElement({
-//     map: map,
-//     position: position,
-//     title: "Uluru",
-//   });
 }
 
-initMap({lat: 39.7684, lng: -86.1581})
+// initMap({lat: 39.7684, lng: -86.1581});
 
-// TODO: data API implementation
-// TODO: utilize geocoding API
-// TODO: implement result filtering
-// TODO: add locations to map
-// TODO: create modal to pop up on location
+//TODO: implement
+function geocode(zip, county){
+    coords = {lat: 39.7684, lng: -86.1581};
+    return coords;
+}
+
+if(zip || county){
+    let coords = geocode(zip, county);
+    initMap(coords);
+}
+
+// add button listeners to re-init map
+const zipSearch = document.getElementById("findZip");
+zipSearch.addEventListener("click", () => {
+    console.log("zip click");
+    zip = zipBox.value;
+    county = "";
+    countyBox.value = "";
+    // geocode and re init map
+    let coords = geocode(zip,county);
+    initMap(coords);
+});
+
+const cntySearch = document.getElementById("findCounty");
+cntySearch.addEventListener("click", () => {
+    console.log("county click");
+    county = countyBox.value;
+    zip = "";
+    zipBox.value = "";
+    // geocode and re init map
+    let coords = geocode(zip,county);
+    initMap(coords);
+});
+
+// TODO: default to Indianapolis and Marion County

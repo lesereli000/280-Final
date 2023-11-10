@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express ();
-// app.use(cors());
 app.use(express.json());
 const dataPath = "Real_Data/realResources.json";
 const fs = require('fs');
@@ -16,13 +15,17 @@ app.get("/", (request, response) =>{
             console.log(err);
         } else {
             console.log("read success");
-            const filters = request.query;
+            let filters = request.query;
+            const search = filters.search;
+            delete filters.search;
+
+
+
             data = JSON.parse(data)
             const filtered = data.filter( obj => {
                 let valid = true;
                 // note this will only do filters where we have an exact vaue to match, it will not do a range
-                for(key in filters){
-                    // console.log(key, obj[key], filters[key]); 
+                for(key in filters){ 
                     valid = valid && obj[key] == filters[key];
                 }
                 return valid;
@@ -30,7 +33,9 @@ app.get("/", (request, response) =>{
             console.log("filtered");
             response.set('Access-Control-Allow-Origin', '*');
             response.send(filtered);
-            // response.send(data);
         }
     });
 });
+
+// TODO: ranges
+// TODO: keyword search
