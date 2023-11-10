@@ -12,8 +12,8 @@ app.listen(port, () => {
 let zipcode = 0;
 let county = "";
 
-app.get("/", (request, response) => {
-    fs.readFile(dataPath, (err, data) => {
+app.get("/", async (request, response) => {
+    fs.readFile(dataPath, async (err, data) => {
         if (err) {
             console.log(err);
         } else {
@@ -25,6 +25,11 @@ app.get("/", (request, response) => {
             zipcode = filters.zipcode;
             county = filters.county;
 
+            const activeFilters = filters.filters;
+            delete filters.filters;
+
+            console.log(activeFilters);
+
             const range = Number(filters.range);
             delete filters.range;
 
@@ -35,12 +40,12 @@ app.get("/", (request, response) => {
                 let valid = true;
 
                 for (key in filters) {
-
                     valid = valid && obj[key] == filters[key]
                 }
                 return valid;
             });
-            const filtered2 = filtered.filter(async obj => {
+
+            const filtered2 = await Promise.all(filtered.map(async obj => {
                 let valid = true;
 
                 const coords = await getCoords(obj);
@@ -54,18 +59,19 @@ app.get("/", (request, response) => {
                     return false;
                 }
                 return distance <= range;
- 
-            });
+            }));
+
+            const finalFiltered = filtered.filter((_, index) => filtered2[index]);
+
             response.set('Access-Control-Allow-Origin', '*');
-            response.send(filtered);
+            response.send(finalFiltered);
         }
     });
 });
 
+
 async function getCoords(obj) {
     let coords = "";
-
-
 
     var firstChar = obj.address_1.charAt(0);
     if (!(firstChar <= '9' && firstChar >= '0')) {
@@ -75,9 +81,13 @@ async function getCoords(obj) {
 
     let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
     let filteredAddress = address.replaceAll(" ", "%20");
+
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
+            if (data.status === "ZERO_RESULTS") {
+                return coords = { lat: 0, lng: 0}
+            }            
             coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
@@ -89,8 +99,11 @@ async function getDistance(obj) {
     if (zipcode != undefined) {
         var macroData = zipcode;
     } else {
-        var macroData = county;
+        var macroData = county + "%20County%IN";
     }
+
+    // console.log(obj.latitude);
+    // console.log(obj.longitude);
 
     return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
