@@ -57,7 +57,6 @@ zipBox.value = zip;
 let county = urlParams.get('cty');
 countyBox.value = county;
 
-// include county/zip/filter options in this method
 async function findLocations(map){
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
@@ -72,28 +71,6 @@ async function findLocations(map){
     } else if (county) {
         queryString += `county=${county}`;
     }
-
-
-    // fetch(`https://in211.scanurag.com/resourcesData/Marion.json`)
-    // .then(response => response.json())
-    // .then(data =>{
-    //     console.log(data);
-    //     for(const location of data){
-    //         // TODO: create popups
-    //         // TODO: stop after 2500 pins
-    //         if(location.latitude != null && location.longitude != null){
-    //             markers.push(new AdvancedMarkerElement({
-    //                 map: map,
-    //                 position: {lat: location.latitude, lng: location.longitude},
-    //                 title: location.agency_name,
-    //             }));
-    //         }
-    //     }
-    //     return markers;
-    // })
-    // .catch(error =>{
-    //     console.error(error);
-    // });
 
     fetch(`http://localhost:3000/?${queryString}`)
     .then(response => response.json())
@@ -117,11 +94,38 @@ async function findLocations(map){
     });
 }
 
+async function geocode(zip, county){
+    let coords = {lat: 39.7684, lng: -86.1581};
+    if(zip){
+        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then(response => response.json())
+        .then(data => {
+            coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
+        });
+        return coords;
+    } else if (county) {
+        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then(response => response.json())
+        .then(data => {
+            coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
+        });
+        console.log(coords);
+        return coords;
+    } else {
+        county = "Marion"
+        coords = {lat: 39.7684, lng: -86.1581};
+        return coords;
+    }
+    return coords;
+}
+
 let map;
 
-async function initMap(position) {
+async function initMap() {
 
   const { Map } = await google.maps.importLibrary("maps");
+
+  position = await geocode(zip,county);
 
   map = new Map(document.getElementById("map"), {
     mapId: '115c56c4cc9092d4',
@@ -130,38 +134,15 @@ async function initMap(position) {
     disableDefaultUI: true,
   });
 
-//   const markers = findLocations(map);
+  const markers = findLocations(map);
 }
 
-//TODO: implement
-function geocode(zip, county){
-    console.log("geocoding");
-    let coords = {lat: 39.7684, lng: -86.1581};
-    if(zip){
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
-        .then(response => response.json())
-        .then(data => {
-            coords = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng};
-            console.log(coords);
-            return coords;
-        });
-    } else if (county) {
-
-    } else {
-        county = "Marion"
-        coords = {lat: 39.7684, lng: -86.1581};
-        return coords;
-    }
-    // return coords;
-}
-
+// default to Marion County (Indianapolis)
 if(zip || county){
-    let coords = geocode(zip, county);
-    console.log("first map");
-    initMap(coords);
+    initMap();
 } else {
     county = "Marion"
-    initMap({lat: 39.7684, lng: -86.1581});
+    initMap();
 }
 
 // add button listeners to re-init map
