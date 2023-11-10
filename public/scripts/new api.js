@@ -13,7 +13,7 @@ let zipcode = 0;
 let county = "";
 
 app.get("/", (request, response) => {
-    fs.readFile(dataPath, (err, data) => {
+    fs.readFile(dataPath, async (err, data) => {
         if (err) {
             console.log(err);
         } else {
@@ -31,31 +31,38 @@ app.get("/", (request, response) => {
             // TODO: implement search parameter
 
             data = JSON.parse(data)
-            const filtered = data.filter(obj => {
+            const filtered = data.filter(async obj => {
                 let valid = true;
 
                 for (key in filters) {
 
                     valid = valid && obj[key] == filters[key]
                 }
+                if (valid) {
+                    const coords = await getCoords(obj);
+
+                    obj.longitude = coords.lng;
+                    obj.latitude = coords.lat;
+
+                    const distance = await getDistance(obj);
+
+                    if (isNaN(distance)) {
+                        return false;
+                    }
+
+                    if (distance > range) {
+                        console.log(obj.agency_name);
+                        valid = false;
+                    }
+
+                }
                 return valid;
             });
-            const filtered2 = filtered.filter(async obj => {
-                let valid = true;
-
-                const coords = await getCoords(obj);
-
-                obj.longitude = coords.lng;
-                obj.latitude = coords.lat;
-
-                const distance = await getDistance(obj);
-
-                if (isNaN(distance)) {
-                    return false;
-                }
-                return distance <= range;
- 
-            });
+            // const filtered2 = filtered.filter(async obj => {
+            //     let valid = true;
+                
+            //     return false;
+            // });
             response.set('Access-Control-Allow-Origin', '*');
             response.send(filtered);
         }
@@ -65,8 +72,6 @@ app.get("/", (request, response) => {
 async function getCoords(obj) {
     let coords = "";
 
-
-
     var firstChar = obj.address_1.charAt(0);
     if (!(firstChar <= '9' && firstChar >= '0')) {
         coords = { lat: 0, lng: 0 };
@@ -75,9 +80,13 @@ async function getCoords(obj) {
 
     let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
     let filteredAddress = address.replaceAll(" ", "%20");
+
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
+            if (data.status === "ZERO_RESULTS") {
+                return coords = { lat: 0, lng: 0}
+            }
             coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
@@ -89,8 +98,11 @@ async function getDistance(obj) {
     if (zipcode != undefined) {
         var macroData = zipcode;
     } else {
-        var macroData = county;
+        var macroData = county + "%20County%IN";
     }
+
+    // console.log(obj.latitude);
+    // console.log(obj.longitude);
 
     return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
