@@ -1,11 +1,10 @@
-function printExternal(divId) {
-    var printWindow = window.open( myWindow, "moreInfo.html"); 
-    var printContents = printWindow.getElementById(divId).innerHTML;
+function printContent(divId) {
+    var printContents = document.getElementById(divId).innerHTML;
     var originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
 
-    printWindow.print();
+    window.print();
 
     document.body.innerHTML = originalContents;
 }

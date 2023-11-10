@@ -23,6 +23,7 @@ nav > a > img {
 #search {
     background-color: #f9f8f5;
     transform: translateY(45px);
+    height: 100px;
 }
 
 
@@ -163,7 +164,8 @@ nav > a > img {
     text-align: center;
     max-height: 700px;
     z-index: 1;
-    transform: translateY(-10px);
+    transform: translateY(-100px);
+    transform: translateX(50px);
     
 }
 
