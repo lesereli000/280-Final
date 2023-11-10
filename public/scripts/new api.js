@@ -9,18 +9,8 @@ app.listen(port, () => {
     console.log("Listening on PORT:", port)
 });
 
-const bodyParser = require('body-parser')
-
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
-app.use(bodyParser.json())
-
-// parse application/vnd.api+json as json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
-
+let zipcode = 0;
+let county = "";
 
 app.get("/", (request, response) => {
     fs.readFile(dataPath, (err, data) => {
@@ -33,8 +23,8 @@ app.get("/", (request, response) => {
             const search = filters.search;
             delete filters.search;
 
-            const zipcode = filters.zipcode;
-            const county = filters.county;
+            zipcode = filters.zipcode;
+            county = filters.county;
 
             const range = filters.range;
             delete filters.range;
@@ -57,10 +47,12 @@ app.get("/", (request, response) => {
                 let valid = true;
 
                 const coords = await getCoords(obj);
+
                 obj.longitude = coords.lng;
                 obj.latitude = coords.lat;
 
-                
+                const distance = await getDistance(obj);
+                return distance <= range;
  
             });
             response.set('Access-Control-Allow-Origin', '*');
@@ -79,5 +71,23 @@ async function getCoords(obj) {
         .then(data => {
             coords = { "lat": data.results[0].geometry.location.lat, "lng": data.results[0].geometry.location.lng };
             return coords;
+        });
+}
+
+async function getDistance(obj) {
+    let distance = 1000;
+
+    if (zipcode != undefined) {
+        var macroData = zipcode;
+    } else {
+        var macroData = county;
+    }
+
+    return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+        .then(response => response.json())
+        .then(data => {
+            distance = data.rows[0].elements[0].distance.text;
+            distance = distance.replace(" mi", "");
+            return distance;
         });
 }
