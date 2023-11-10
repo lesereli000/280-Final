@@ -69,7 +69,7 @@ async function getCoords(obj) {
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
-            coords = { "lat": data.results[0].geometry.location.lat, "lng": data.results[0].geometry.location.lng };
+            coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
 }
