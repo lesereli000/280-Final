@@ -30,31 +30,32 @@ app.get("/", (request, response) => {
             console.log("read success");
             let filters = request.query;
 
-            console.log("Filters: " + request.query);
-
             const search = filters.search;
-            const range = filters.range;
+            delete filters.search;
+
             const zipcode = filters.zipcode;
             const county = filters.county;
 
-            delete filters.search;
+            const range = filters.range;
             delete filters.range;
-            delete filters.zipcode;
-            delete filters.county;
 
-            console.log("Search: " + search);
-            console.log("Range: " + range);
-            console.log("Zipcode: " + zipcode);
-            console.log("County: " + county);
+
+            // console.log("Search: " + search);
+            // console.log("Range: " + range);
+            // console.log("Zipcode: " + zipcode);
+            // console.log("County: " + county);
 
             // TODO: implement search parameter
 
             data = JSON.parse(data)
             const filtered = data.filter(obj => {
-                let valid = false;
-                // note this will only do filters where we have an exact vaue to match, it will not do a range
+                let valid = true;
+
+                const longLat = getLongLat(obj);
+
                 for (key in filters) {
-                    valid = valid && obj[key] == filters[key];
+
+                    valid = valid && obj[key] == filters[key]
                 }
                 return valid;
             });
@@ -64,3 +65,14 @@ app.get("/", (request, response) => {
         }
     });
 });
+
+async function getLongLat(obj) {
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=`)
+        .then(response => response.json())
+        .then(data => {
+        
+        })
+        .catch(error => {
+            console.log(error);
+    })
+}
