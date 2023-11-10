@@ -82,7 +82,7 @@ async function getCoords(obj) {
     let address = obj.address_1 + " " + obj.city + " " + obj.county + " " + obj.state_province;
     let filteredAddress = address.replaceAll(" ", "%20");
 
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${filteredAddress}&key=AIzaSyA98lBDKzLb5z4TzRfZfYEPnD4aOXzuFfg`)
         .then(response => response.json())
         .then(data => {
             if (data.status === "ZERO_RESULTS") {
@@ -105,7 +105,7 @@ async function getDistance(obj) {
     // console.log(obj.latitude);
     // console.log(obj.longitude);
 
-    return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
+    return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyA98lBDKzLb5z4TzRfZfYEPnD4aOXzuFfg`)
         .then(response => response.json())
         .then(data => {
             if (data.rows[0].elements[0].status === "ZERO_RESULTS") {
