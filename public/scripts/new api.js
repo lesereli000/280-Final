@@ -12,7 +12,7 @@ app.listen(port, () => {
 let zipcode = 0;
 let county = "";
 
-app.get("/", (request, response) => {
+app.get("/", async (request, response) => {
     fs.readFile(dataPath, async (err, data) => {
         if (err) {
             console.log(err);
@@ -25,49 +25,50 @@ app.get("/", (request, response) => {
             zipcode = filters.zipcode;
             county = filters.county;
 
+            const activeFilters = filters.filters;
+            delete filters.filters;
+
+            console.log(activeFilters);
+
             const range = Number(filters.range);
             delete filters.range;
 
             // TODO: implement search parameter
 
             data = JSON.parse(data)
-            const filtered = data.filter(async obj => {
+            const filtered = data.filter(obj => {
                 let valid = true;
 
                 for (key in filters) {
-
                     valid = valid && obj[key] == filters[key]
-                }
-                if (valid) {
-                    const coords = await getCoords(obj);
-
-                    obj.longitude = coords.lng;
-                    obj.latitude = coords.lat;
-
-                    const distance = await getDistance(obj);
-
-                    if (isNaN(distance)) {
-                        return false;
-                    }
-
-                    if (distance > range) {
-                        console.log(obj.agency_name);
-                        valid = false;
-                    }
-
                 }
                 return valid;
             });
-            // const filtered2 = filtered.filter(async obj => {
-            //     let valid = true;
-                
-            //     return false;
-            // });
+
+            const filtered2 = await Promise.all(filtered.map(async obj => {
+                let valid = true;
+
+                const coords = await getCoords(obj);
+
+                obj.longitude = coords.lng;
+                obj.latitude = coords.lat;
+
+                const distance = await getDistance(obj);
+
+                if (isNaN(distance)) {
+                    return false;
+                }
+                return distance <= range;
+            }));
+
+            const finalFiltered = filtered.filter((_, index) => filtered2[index]);
+
             response.set('Access-Control-Allow-Origin', '*');
-            response.send(filtered);
+            response.send(finalFiltered);
         }
     });
 });
+
 
 async function getCoords(obj) {
     let coords = "";
@@ -86,7 +87,7 @@ async function getCoords(obj) {
         .then(data => {
             if (data.status === "ZERO_RESULTS") {
                 return coords = { lat: 0, lng: 0}
-            }
+            }            
             coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
