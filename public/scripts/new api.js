@@ -17,7 +17,6 @@ app.get("/", (request, response) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("read success");
             let filters = request.query;
 
             const search = filters.search;
@@ -41,8 +40,6 @@ app.get("/", (request, response) => {
                 }
                 return valid;
             });
-            console.log("filtered part 1");
-
             const filtered2 = filtered.filter(async obj => {
                 let valid = true;
 
@@ -61,7 +58,6 @@ app.get("/", (request, response) => {
             });
             response.set('Access-Control-Allow-Origin', '*');
             response.send(filtered);
-            console.log("All done!")
         }
     });
 });
@@ -96,9 +92,6 @@ async function getDistance(obj) {
         var macroData = county;
     }
 
-    console.log(obj.latitude);
-    console.log(obj.longitude);
-    
     return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyBPtQdhjLymTBQq5kKId0mO1Wjq6vFh6PY`)
         .then(response => response.json())
         .then(data => {
