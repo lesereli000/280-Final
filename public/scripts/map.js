@@ -1,3 +1,5 @@
+const { query } = require("express");
+
 const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
 output.innerHTML = `Max Distance: ${slider.value} Miles`;
@@ -62,6 +64,8 @@ async function findLocations(map){
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
     let queryString = "";
+
+    queryString += `range=${slider.value}`;
     
     // TODO: finish query string building
 
@@ -72,29 +76,7 @@ async function findLocations(map){
     }
 
 
-    fetch(`https://in211.scanurag.com/resourcesData/Marion.json`)
-    // fetch(`http://localhost:3000/?${queryString}`)
-    .then(response => response.json())
-    .then(data =>{
-        console.log(data);
-        for(const location of data){
-            // TODO: create popups
-            // TODO: stop after 2500 pins
-            if(location.latitude != null && location.longitude != null){
-                markers.push(new AdvancedMarkerElement({
-                    map: map,
-                    position: {lat: location.latitude, lng: location.longitude},
-                    title: location.agency_name,
-                }));
-            }
-        }
-        return markers;
-    })
-    .catch(error =>{
-        console.error(error);
-    });
-
-    // fetch(`http://localhost:3000/?${queryString}`)
+    // fetch(`https://in211.scanurag.com/resourcesData/Marion.json`)
     // .then(response => response.json())
     // .then(data =>{
     //     console.log(data);
@@ -114,6 +96,27 @@ async function findLocations(map){
     // .catch(error =>{
     //     console.error(error);
     // });
+
+    fetch(`http://localhost:3000/?${queryString}`)
+    .then(response => response.json())
+    .then(data =>{
+        console.log(data);
+        for(const location of data){
+            // TODO: create popups
+            // TODO: stop after 2500 pins
+            if(location.latitude != null && location.longitude != null){
+                markers.push(new AdvancedMarkerElement({
+                    map: map,
+                    position: {lat: location.latitude, lng: location.longitude},
+                    title: location.agency_name,
+                }));
+            }
+        }
+        return markers;
+    })
+    .catch(error =>{
+        console.error(error);
+    });
 }
 
 let map;
@@ -132,40 +135,55 @@ async function initMap(position) {
   const markers = findLocations(map);
 }
 
-// initMap({lat: 39.7684, lng: -86.1581});
-
 //TODO: implement
 function geocode(zip, county){
-    coords = {lat: 39.7684, lng: -86.1581};
+    let place = "";
+    let coords ={lat: 0, lng: 0};
+    // if(zip){
+    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?["postal_code":""]`)
+    //     .then();
+    // } else if (county) {
+
+    // } else {
+    //     county = "Marion"
+    //     coords = {lat: 39.7684, lng: -86.1581};
+    // }
     return coords;
 }
 
 if(zip || county){
     let coords = geocode(zip, county);
     initMap(coords);
+} else {
+    county = "Marion"
+    initMap({lat: 39.7684, lng: -86.1581});
 }
 
 // add button listeners to re-init map
 const zipSearch = document.getElementById("findZip");
 zipSearch.addEventListener("click", () => {
-    console.log("zip click");
+    // console.log("zip click");
     zip = zipBox.value;
     county = "";
     countyBox.value = "";
-    // geocode and re init map
-    let coords = geocode(zip,county);
-    initMap(coords);
+    // only update map if we know what county to look at
+    if(zip) {
+        // geocode and re init map
+        let coords = geocode(zip,county);
+        initMap(coords);
+    }
 });
 
 const cntySearch = document.getElementById("findCounty");
 cntySearch.addEventListener("click", () => {
-    console.log("county click");
+    // console.log("county click");
     county = countyBox.value;
     zip = "";
     zipBox.value = "";
-    // geocode and re init map
-    let coords = geocode(zip,county);
-    initMap(coords);
+    // only update map if we know what county to look at
+    if(county) {
+        // geocode and re init map
+        let coords = geocode(zip,county);
+        initMap(coords);
+    }
 });
-
-// TODO: default to Indianapolis and Marion County
