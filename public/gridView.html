@@ -8,7 +8,6 @@
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Symbols+Outlined"> -->
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css' integrity='sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==' crossorigin='anonymous'/>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css' integrity='sha512-AZtJoEn5SfSZimv10x5NMO2gaZCdoU8nxtHJK8O4SbKNlQeb1ggkvf0b0QixuuXIjX3Tp5jzBbTWajki81Vl2g==' crossorigin='anonymous'/> 
-        <link rel='stylesheet' href="styles/main.css">
         <link rel="stylesheet" href="styles/grid.css">
         <link rel="stylesheet" media="print" href="styles/print.css">
         <link rel = "icon" type = "image/x-icon" href="images/211.png">
@@ -46,7 +45,7 @@
 
               
               
-              <div class="grid-container">
+              <div class="grid-container" id="allCards">
                   <div class="grid-item">
                       <div class="card">
                         <div class="card-header colorful-header">
@@ -84,17 +83,41 @@
                         </div>
                         <div class="row" id="buttonRow">
                            
-                            <button type="button" class="btn btn-primary" id="moreinfo">More Info</button>
+                            <!--<button type="button" class="btn btn-primary" id="moreinfo" data-toggle="modal">More Info</button>-->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                                Launch demo modal
+                              </button>
                             <button type="button" class="btn btn-primary" id="printCardBtn">Print</button>
+
                         </div>
                         
                       </div>
+                        <!-- Modal -->
+                        <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                ...
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                   </div>
-
-                  
-                  
                   <!-- Add more grid items with cards as needed -->
               </div>
+
+              
+          
               
               
               
@@ -102,13 +125,13 @@
             
 
             <a href="mapView.html"><button type="button" class="btn" id="switchView">To Map View</button></a>
-            <a href=""><button type="button" class="btn" id="printSelectBtn">Print Selections</button></a>
-            <a href=""><button type="button" class="btn" id="printAllBtn">Print All</button></a>
+            <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printSelectBtn">Print Selections</button></a>
+            <a href=""><button type="button" class="btn" onclick="printContent('allCards')" id="printAllBtn">Print All</button></a>
 
         </div>
         
         <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js' integrity='sha512-ToL6UYWePxjhDQKNioSi4AyJ5KkRxY+F1+Fi7Jgh0Hp5Kk2/s8FD7zusJDdonfe5B00Qw+B8taXxF6CFLnqNCw==' crossorigin='anonymous'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js' integrity='sha512-rXm6RiYDlz+aZC/ht75tGzeAmCg4gVfBA6Be5s5uENSahiXkgwEy10J2Cc+dxUAW4lRRQYbS5pugMOqBrs8ksw==' crossorigin='anonymous'></script>
-        <script src="scripts/main.js" async defer></script>
+        <script src="scripts/grid.js" async defer></script>
     </body>
 </html>
