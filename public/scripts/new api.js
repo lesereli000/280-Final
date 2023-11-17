@@ -29,7 +29,6 @@ app.get("/", async (request, response) => {
             if (filters.county) {
                 counties = filters.county.split(", ");
             }
-            // TODO: Support current location
 
             const activeFilters = filters.filters;
             delete filters.filters;

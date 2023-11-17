@@ -1,6 +1,40 @@
+// TODO: Remove auto search
+// TODO: Auto fill search params from URL
+
 const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
 output.innerHTML = `Max Distance: ${slider.value} Miles`;
+
+
+let userLat = 0;
+let userLng = 0;
+
+if ("geolocation" in navigator) {
+    // Prompt user for permission to access their location
+    navigator.geolocation.getCurrentPosition(
+        // Success callback function
+        async (position) => {
+            // Get the user's latitude and longitude coordinates
+            userLat = position.coords.latitude;
+            userLng = position.coords.longitude;
+
+            const zipcounty = await toZipCounty(userLat, userLng);
+            zip = zipcounty.zip;
+            county = zipcounty.county;
+            initMap();
+            updateZipField(zip);
+            updateCountyField(county);
+        },
+        // Error callback function
+        (error) => {
+            // Handle errors, e.g. user denied location sharing permissions
+            console.error("Error getting user location:", error.message);
+        }
+    );
+} else {
+    // Geolocation is not supported by the browser
+    console.error("Geolocation is not supported by this browser.");
+}
 
 slider.oninput = function () {
     output.innerHTML = `Max Distance: ${this.value} Miles`;
@@ -73,29 +107,63 @@ async function findLocations(map) {
     }
 
     if (search.value) {
-    // TODO: strip for XSS attacks (see main.js)
-    // TODO: support multiple queries with commas and put into array (see main.js)
-        queryString += `search=${search.value}`;
+        queryArray = queries.split(",");
+        let queryURL = "";
+        queryArray.forEach(q => {
+            q = q.trim();
+            q = q.toProperCase();
+            if (isNonXSS(q)) {
+                queryURL = queryURL + q + ", ";
+            }
+        });
+        if (queryURL != "") {
+            queryString += `search=${search.value}`;
+        }
     }
 
     console.log(queryString);
 
     if (zip) {
-    // TODO: bound input and strip for XSS attacks (see main.js)
-    // TODO: support mutliple zipcodes with commas and put into array (see main.js)
-    // TODO: Update searching near: 
-        queryString += `zipcode=${zip}`;
+        zip = zip.replaceAll(" ", "");
+        zipArray = zip.split(",");
+        let zipURL = "";
+        zipArray.forEach(curZip => {
+            if (curZip.length == 5) {
+                if (isCharNumber(curZip.charAt(0)) && isCharNumber(curZip.charAt(1)) && isCharNumber(curZip.charAt(2)) && isCharNumber(curZip.charAt(3)) && isCharNumber(curZip.charAt(4))) {
+                    zipURL = zipURL + curZip + ", ";
+                }
+            }
+        });
+        if (zipURL != "") {
+            queryString += `zipcode=${zipURL.slice(0, -2)}`;
+            updateSearchNearField(zipURL.slice(0, -2));
+        }
     } else if (county) {
-        // TODO: strip for XSS attacks (see main.js)
-        // TODO: support mutliple counties with commas and put into array (see main.js)
-        // TODO: Update searching near:
-        queryString += `county=${county}`;
+        ctyArray = county.split(",");
+        let ctyURL = "";
+        ctyArray.forEach(curCty => {
+            curCty = curCty.trim();
+            curCty = curCty.toProperCase();
+            if (isCounty(curCty)) {
+                if (curCty == "Dekalb") curCty = "DeKalb";
+                if (curCty == "Lagrange") curCty = "LaGrange";
+                if (curCty == "Laporte") curCty = "LaPorte";
+                ctyURL = ctyURL + curCty + ", ";
+            }
+        });
+        if (ctyURL != "") {
+            queryString += `county=${ctyURL.slice(0, -2)}`;
+            updateSearchNearField(ctyURL.slice(0, -2) + " County");
+        }
+        console.log(queryString);
     }
+    // TODO: Fix line below
+    // window.location.href = `mapView.html?${queryString}`;
+    document.getElementById("loader").classList.add("loader");
+    document.getElementById("loaderParent").classList.add("loader-parent");
     fetch(`http://localhost:3000/?${queryString}`)
         .then(response => response.json())
         .then(async data => {
-            document.getElementById("loader").classList.add("loader");
-            document.getElementById("loaderParent").classList.add("loader-parent");
             for (const location of data) {
                 if (location.latitude != null && location.longitude != null) {
                     const coords = await getCoords(location);
@@ -138,7 +206,6 @@ async function findLocations(map) {
 
 async function geocode(zip, county) {
     // TODO: Map shows all responses for multi-select (averages for cooords?)
-    let coords = { lat: 39.7684, lng: -86.1581 };
     if (zip) {
         zip = zip.split(", ");
         zip = zip[0];
@@ -165,8 +232,13 @@ async function geocode(zip, county) {
             });
         return coords;
     } else {
-        county = "Marion"
-        coords = { lat: 39.7684, lng: -86.1581 };
+        if (userLat != 0) {
+            coords = { lat: userLat, lng: userLng };
+            console.log(coords);
+        } else {
+            county = "Marion"
+            coords = { lat: 39.7684, lng: -86.1581 };
+        }
         return coords;
     }
 }
@@ -178,6 +250,11 @@ async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
 
     position = await geocode(zip, county);
+    if (zip) {
+        updateSearchNearField(zip);
+    } else {
+        updateSearchNearField(county);
+    }
 
     map = new Map(document.getElementById("map"), {
         mapId: '115c56c4cc9092d4',
@@ -208,6 +285,7 @@ zipSearch.addEventListener("click", () => {
         // geocode and re init map
         let coords = geocode(zip, county);
         initMap(coords);
+
     }
 });
 
@@ -245,4 +323,65 @@ async function getCoords(obj) {
             coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
             return coords;
         });
+}
+
+async function toZipCounty(lat, lng) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "ZERO_RESULTS") {
+                return zipCounty = { zip: 46204, county: "Marion" }
+            }
+            let countyFixed = data.results[0].address_components[4].long_name;
+            countyFixed = countyFixed.replaceAll(" County", "");
+            zipCounty = { zip: data.results[0].address_components[7].long_name, county: countyFixed };
+            return zipCounty;
+        });
+}
+
+function updateZipField(newZip) {
+    document.getElementById("zip").value = newZip;
+}
+
+function updateCountyField(newCounty) {
+    document.getElementById("county").value = newCounty;
+}
+
+function updateSearchNearField(newLocation) {
+    document.getElementById("locationLabel").innerHTML = `Showing services near ${newLocation}`;
+}
+
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+};
+
+function isCounty(str) {
+    let valid = false;
+    let countyList = ["Adams", "Allen", "Bartholomew", "Benton", "Blackford", "Boone", "Brown", "Carroll", "Cass", "Clark", "Clay", "Clinton", "Crawford", "Daviess", "Dearborn", "Decatur", "Dekalb", "Delaware", "Dubois", "Elkhart", "Fayette", "Floyd", "Fountain", "Franklin", "Fulton", "Gibson", "Grant", "Greene", "Hamilton", "Hancock", "Harrison", "Hendricks", "Henry", "Howard", "Huntington", "Jackson", "Jasper", "Jay", "Jefferson", "Jennings", "Johnson", "Knox", "Kosciusko", "Lagrange", "Lake", "Laporte", "Lawrence", "Madison", "Marion", "Marshall", "Martin", "Miami", "Monroe", "Montgomery", "Morgan", "Newton", "Noble", "Ohio", "Orange", "Owen", "Parke", "Perry", "Pike", "Porter", "Posey", "Pulaski", "Putnam", "Randolph", "Ripley", "Rush", "St. Joseph", "St Joseph", "Saint Joseph", "Scott", "Shelby", "Spencer", "Starke", "Steuben", "Sullivan", "Switzerland", "Tippecanoe", "Tipton", "Union", "Vanderburgh", "Vermillion", "Vigo", "Wabash", "Warren", "Warrick", "Washington", "Wayne", "Wells", "White", "Whitley"];
+    countyList.forEach(county => {
+        if (county == str) {
+            valid = true;
+            return;
+        }
+    });
+    return valid;
+}
+
+function isNonXSS(str) {
+    let valid = false;
+
+    valid = valid || str.includes("<");
+    valid = valid || str.includes(">");
+    valid = valid || str.includes("(");
+    valid = valid || str.includes(")");
+    valid = valid || str.includes("{");
+    valid = valid || str.includes("}");
+    valid = valid || str.includes("[");
+    valid = valid || str.includes("]");
+
+    return !valid;
+}
+
+function isCharNumber(c) {
+    return c >= '0' && c <= '9';
 }

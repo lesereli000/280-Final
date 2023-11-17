@@ -5,6 +5,35 @@ const submitBtn = document.getElementById("mapButton");
 
 const mapURL = "mapView.html";
 
+let userLat = 0;
+let userLng = 0;
+
+if ("geolocation" in navigator) {
+    // Prompt user for permission to access their location
+    navigator.geolocation.getCurrentPosition(
+        // Success callback function
+        async (position) => {
+            // Get the user's latitude and longitude coordinates
+            userLat = position.coords.latitude;
+            userLng = position.coords.longitude;
+
+            const zipcounty = await toZipCounty(userLat, userLng);
+            zip = zipcounty.zip;
+            county = zipcounty.county;
+            updateZipField(zip);
+            updateCountyField(county);
+        },
+        // Error callback function
+        (error) => {
+            // Handle errors, e.g. user denied location sharing permissions
+            console.error("Error getting user location:", error);
+        }
+    );
+} else {
+    // Geolocation is not supported by the browser
+    console.error("Geolocation is not supported by this browser.");
+}
+
 submitBtn.addEventListener("click", () => {
     let zip = zipBox.value;
     let county = countyBox.value;
@@ -109,4 +138,26 @@ function isNonXSS(str) {
     valid = valid || str.includes("]");
 
     return !valid;
+}
+
+async function toZipCounty(lat, lng) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "ZERO_RESULTS") {
+                return zipCounty = { zip: 46204, county: "Marion" }
+            }
+            let countyFixed = data.results[0].address_components[4].long_name;
+            countyFixed = countyFixed.replaceAll(" County", "");
+            zipCounty = { zip: data.results[0].address_components[7].long_name, county: countyFixed };
+            return zipCounty;
+        });
+}
+
+function updateZipField(zip) {
+    document.getElementById("zipcodeSearch").value = zip;
+}
+
+function updateCountyField(county) {
+    document.getElementById("countySearch").value = county;
 }
