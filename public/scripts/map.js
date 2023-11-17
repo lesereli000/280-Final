@@ -91,10 +91,11 @@ async function findLocations(map) {
         // TODO: Update searching near:
         queryString += `county=${county}`;
     }
-
     fetch(`http://localhost:3000/?${queryString}`)
         .then(response => response.json())
         .then(async data => {
+            document.getElementById("loader").classList.add("loader");
+            document.getElementById("loaderParent").classList.add("loader-parent");
             for (const location of data) {
                 if (location.latitude != null && location.longitude != null) {
                     const coords = await getCoords(location);
@@ -126,6 +127,8 @@ async function findLocations(map) {
                     infos.push(info);
                 }
             }
+            document.getElementById("loader").classList.remove("loader");
+            document.getElementById("loaderParent").classList.remove("loader-parent");
             return markers;
         })
         .catch(error => {

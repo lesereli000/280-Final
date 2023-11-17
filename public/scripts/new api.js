@@ -12,7 +12,6 @@ app.listen(port, () => {
 let zipcode = 0;
 let county = "";
 
-// TODO: Show a loading icon when waiting for this request
 app.get("/", async (request, response) => {
     fs.readFile(dataPath, async (err, data) => {
         if (err) {

@@ -1,8 +1,53 @@
 /* TODO: Sideways mobile view */
 body {
     overflow: hidden;
+    background: rgba(236, 233, 222, 1);
 }
 
+.loader-parent {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: transparent;
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    margin: -76px 0 0 -76px;
+    border: 16px solid #f9f8f5;
+    /* Light grey */
+    border-top: 16px solid #246bce;
+    border-bottom: 16px solid #246bce;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    background-color: transparent;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .navbar {
     background-color: #ece9de;
     position: fixed;

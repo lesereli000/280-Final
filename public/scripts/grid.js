@@ -1,5 +1,6 @@
 /* TODO: Put location pin data in cards */
 /* TODO: Display created cards */
+/* TODO: Make loading icon for this view */
 
 const printCardBtn = document.getElementById("printCardBtn");
 const printSelectBtn = document.getElementById("printSelectBtn");
