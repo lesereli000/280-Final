@@ -21,10 +21,14 @@ app.get("/", async (request, response) => {
 
             const search = filters.search;
             delete filters.search;
-
-            zipcode = filters.zipcode;
-            county = filters.county;
-            // TODO: Support multiple of both of those
+            let zipcodes = "";
+            if (filters.zipcode) {
+                zipcodes = filters.zipcode.split(", ");
+            }
+            let counties = "";
+            if (filters.county) {
+                counties = filters.county.split(", ");
+            }
             // TODO: Support current location
 
             const activeFilters = filters.filters;
@@ -38,10 +42,24 @@ app.get("/", async (request, response) => {
             data = JSON.parse(data)
             const filtered = data.filter(obj => {
                 let valid = true;
-
-                for (key in filters) {
-                    valid = valid && obj[key] == filters[key]
+                let foundOneZip = false;
+                if (zipcodes.length != 0) {
+                    for (let i = 0; i < zipcodes.length; i++) {
+                        foundOneZip = foundOneZip || obj["zipcode"] == zipcodes[i];
+                    }
+                } else {
+                    foundOneZip = true;
                 }
+                let foundOneCounty = false;
+                if (counties.length != 0) {
+                    for (let i = 0; i < counties.length; i++) {
+                        foundOneCounty = foundOneCounty || obj["county"] == counties[i];
+                    }
+                } else {
+                    foundOneCounty = true;
+                }
+
+                valid = valid && foundOneZip && foundOneCounty;
                 return valid;
             });
 
@@ -54,12 +72,30 @@ app.get("/", async (request, response) => {
                 obj.longitude = coords.lng;
                 obj.latitude = coords.lat;
 
-                const distance = await getDistance(obj);
-
-                if (isNaN(distance)) {
-                    return false;
+                let inSomeDistance = false;
+                if (zipcodes != "") {
+                    for (let i = 0; i < zipcodes.length; i++) {
+                        var macroData = zipcodes[i];
+                        const distance = await getDistance(obj, macroData);
+                        if (isNaN(distance)) {
+                            inSomeDistance = false;
+                            break;
+                        }
+                        inSomeDistance = inSomeDistance || distance <= range;
+                    }
+                    var macroData = zipcodes[1];
+                } else {
+                    for (let i = 0; i < counties.length; i++) {
+                        var macroData = counties[i] + "%20County%IN";
+                        const distance = await getDistance(obj, macroData);
+                        if (isNaN(distance)) {
+                            inSomeDistance = false;
+                            break;
+                        }
+                        inSomeDistance = inSomeDistance || distance <= range;
+                    }
                 }
-                return distance <= range;
+                return inSomeDistance;
             }));
 
             // TODO: implement search parameter
@@ -97,22 +133,13 @@ async function getCoords(obj) {
         });
 }
 
-async function getDistance(obj) {
+async function getDistance(obj, macroData) {
     let distance = 1000;
-
-    if (zipcode != undefined) {
-        var macroData = zipcode;
-    } else {
-        var macroData = county + "%20County%IN";
-    }
-
-    // console.log(obj.latitude);
-    // console.log(obj.longitude);
 
     return fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${obj.latitude},${obj.longitude}&origins=${macroData}&units=imperial&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
         .then(response => response.json())
         .then(data => {
-            if (data.rows[0].elements[0].status === "ZERO_RESULTS") {
+            if (data.rows[0].elements[0].status === "ZERO_RESULTS" || data.rows[0].elements[0].status === "NOT_FOUND") {
                 return 1000;
             }
             distance = data.rows[0].elements[0].distance.text;
