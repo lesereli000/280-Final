@@ -137,8 +137,11 @@ async function findLocations(map) {
 }
 
 async function geocode(zip, county) {
+    // TODO: Map shows all responses for multi-select (averages for cooords?)
     let coords = { lat: 39.7684, lng: -86.1581 };
     if (zip) {
+        zip = zip.split(", ");
+        zip = zip[0];
         await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
             .then(response => response.json())
             .then(data => {
@@ -150,6 +153,8 @@ async function geocode(zip, county) {
             });
         return coords;
     } else if (county) {
+        county = county.split(", ");
+        county = county[0];
         await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20County%20IN&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
             .then(response => response.json())
             .then(data => {
