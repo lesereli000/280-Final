@@ -53,6 +53,8 @@ function cleanArray(array) {
     }
     return newArr;
 }
+// TODO: Make the commented out code work with new accordions for taxomity
+
 
 for (const subcat of subcats) {
     // TODO: Make this support clicking larger section select all (ie. Food)
@@ -93,6 +95,8 @@ let county = urlParams.get('cty');
 countyBox.value = county;
 
 const search = document.getElementById("searchBar");
+let searches = urlParams.get('q');
+search.value = searches;
 
 async function findLocations(map) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -103,11 +107,11 @@ async function findLocations(map) {
     queryString += `range=${slider.value}&`;
 
     if (activeFilters.length != 0) {
-        queryString += `filters=[${activeFilters}]&`
+        queryString += `filters=${activeFilters}&`
     }
 
     if (search.value) {
-        queryArray = queries.split(",");
+        queryArray = search.value.split(",");
         let queryURL = "";
         queryArray.forEach(q => {
             q = q.trim();
@@ -117,7 +121,7 @@ async function findLocations(map) {
             }
         });
         if (queryURL != "") {
-            queryString += `search=${search.value}`;
+            queryString += `search=${search.value}&`;
         }
     }
 
@@ -135,7 +139,7 @@ async function findLocations(map) {
             }
         });
         if (zipURL != "") {
-            queryString += `zipcode=${zipURL.slice(0, -2)}`;
+            queryString += `zipcode=${zipURL.slice(0, -2)}&`;
             updateSearchNearField(zipURL.slice(0, -2));
         }
     } else if (county) {
@@ -201,6 +205,8 @@ async function findLocations(map) {
         })
         .catch(error => {
             console.error(error);
+            document.getElementById("loader").classList.remove("loader");
+            document.getElementById("loaderParent").classList.remove("loader-parent");
         });
 }
 
