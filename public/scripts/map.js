@@ -1,5 +1,6 @@
 // TODO: Remove auto search
 // TODO: Auto fill search params from URL
+// TODO: Remove google map markers already there
 
 const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
@@ -179,7 +180,6 @@ async function findLocations(map) {
                         position: { lat: location.latitude, lng: location.longitude },
                         title: location.agency_name,
                     });
-
                     const info = new google.maps.InfoWindow({
                         content: `<a href="moreInfo.html">
                                 <strong>${location.agency_name}</strong>
@@ -262,12 +262,40 @@ async function initMap() {
         updateSearchNearField(county);
     }
 
+    var myStyles = [
+        {
+            "elementType": "labels",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.neighborhood",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        }
+    ];
+
     map = new Map(document.getElementById("map"), {
         mapId: '115c56c4cc9092d4',
         zoom: 11,
         center: position,
         disableDefaultUI: true,
     });
+
 
     const markers = findLocations(map);
 }

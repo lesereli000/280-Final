@@ -57,7 +57,6 @@ app.get("/", async (request, response) => {
                 return valid;
             });
 
-            // TODO: Make range include some in other counties that are close
             const filtered2 = await Promise.all(filtered.map(async obj => {
                 let valid = true;
 
@@ -92,49 +91,11 @@ app.get("/", async (request, response) => {
                 return inSomeDistance;
             }));
 
-            // TODO: Cross county lines for range (code below should work but doesn't)
-
-            // const distanceFits = data.filter(async obj => {
-            //     let valid = true;
-
-            //     const coords = await getCoords(obj);
-
-            //     obj.longitude = coords.lng;
-            //     obj.latitude = coords.lat;
-
-            //     let inSomeDistance = false;
-            //     if (zipcodes != "") {
-            //         for (let i = 0; i < zipcodes.length; i++) {
-            //             var macroData = zipcodes[i];
-            //             const distance = await getDistance(obj, macroData);
-            //             if (isNaN(distance)) {
-            //                 inSomeDistance = false;
-            //                 break;
-            //             }
-            //             inSomeDistance = inSomeDistance || distance <= range;
-            //         }
-            //         var macroData = zipcodes[1];
-            //     } else {
-            //         for (let i = 0; i < counties.length; i++) {
-            //             var macroData = counties[i] + "%20County%IN";
-            //             const distance = await getDistance(obj, macroData);
-            //             if (isNaN(distance)) {
-            //                 inSomeDistance = false;
-            //                 break;
-            //             }
-            //             inSomeDistance = inSomeDistance || distance <= range;
-            //         }
-            //     }
-            //     return inSomeDistance;
-            // });
+            // TODO: See if crossing the county is worth it. I think it will slow the algorithm down too much to be useful and vote no.
 
             const postFiltered2 = filtered.filter((_, index) => filtered2[index]);
 
-            // const postFiltered2 = midFiltered2.concat(distanceFits);
-
             let postFiltered3;
-
-            console.log("Merged!");
 
             if (search) {
                 let searchTerms = search.split(", ");
@@ -171,7 +132,6 @@ app.get("/", async (request, response) => {
                     let valid = false;
 
                     filters.forEach((filter) => {
-                        console.log()
                         valid = valid || obj["taxonomy_name"] == filter;
                         valid = valid || obj["taxonomy_category"] == filter;
                         valid = valid || obj["nameLevel2"] == filter;
@@ -188,10 +148,33 @@ app.get("/", async (request, response) => {
                 finalFiltered = postFiltered3;
             }
 
+            const mergedFinalFiltered = finalFiltered.reduce((acc, current) => {
+                const x = acc.find(item => {
+                    if (item.site_id === current.site_id) {
+                        item.service_id = `${item.service_id}, ${current.site_id}`;
+                        item.service_name = `${item.service_name}, ${current.service_name}`;
+                        item.service_description = `${item.service_description}, ${current.service_description}`;
+                        item.taxonomy_code = `${item.taxonomy_code}, ${current.taxonomy_code}`;
+                        item.taxonomy_category = `${item.taxonomy_category}, ${current.taxonomy_category}`;
+                        item.nameLevel2 = `${item.nameLevel2}, ${current.nameLevel2}`;
+                        item.nameLevel3 = `${item.nameLevel3}, ${current.nameLevel3}`;
+                        item.nameLevel4 = `${item.nameLevel4}, ${current.nameLevel4}`;
+                        item.nameLevel5 = `${item.nameLevel5}, ${current.nameLevel5}`;
+                        item.taxonomy_name = `${item.taxonomy_name}, ${current.taxonomy_name}`;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                if (!x) {
+                    return acc.concat([current]);
+                } else {
+                    return acc;
+                }
+            }, []);
 
-            // TODO: Stack resources on top of each other so it's possible to see them all
             response.set('Access-Control-Allow-Origin', '*');
-            response.send(finalFiltered);
+            response.send(mergedFinalFiltered);
         }
     });
 });
