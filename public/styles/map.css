@@ -48,11 +48,12 @@ body {
         transform: rotate(360deg);
     }
 }
+
 .navbar {
     background-color: #ece9de;
     position: fixed;
     top: 0;
-        width: 100%;
+    width: 100%;
     height: 55px;
     z-index: 9;
     --mdb-navbar-box-shadow: 0 0 0 0;
@@ -98,6 +99,43 @@ nav>a>img {
     right: 100px;
     padding: 10px 3px;
     min-width: 250px;
+}
+
+.accordion-border-setup {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 40px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+#search>* {
+    display: flex;
+    justify-content: space-evenly;
+    transform: translateY(-1px);
+}
+
+.zip-county-setup {
+    width: 8em;
+    border-radius: 40px;
+    border: none;
+    padding-left: 10px;
+}
+
+#searchIcon {
+    position: fixed;
+    top: 4px;
+    left: 3px;
+    height: 20px;
+    width: 20px;
+}
+
+#searchBar {
+    border: none;
+    background-color: #f9f8f5;
+    width: 90vw;
+    margin-left: 15px;
+    padding-left: 15px;
 }
 
 #locationLabel {
@@ -202,16 +240,16 @@ h2 .accordion-button {
 
 .find-btn {
     width: 60px;
-        border-radius: 40px;
-        border: none;
-        background-color: #246bce;
+    border-radius: 40px;
+    border: none;
+    background-color: #246bce;
     color: white;
 }
 
 @media screen and (max-width: 992px) {
     * {
         --mdb-body-font-size: 2vh;
-        }
+    }
 
     #search {
         transform: none;
@@ -221,6 +259,19 @@ h2 .accordion-button {
         width: 90vw;
         height: 6vh;
         padding: 1.2vh 0.35vh;
+    }
+
+    #searchIcon {
+        position: fixed;
+        top: 0;
+        left: 2px;
+        margin-right: 20vw;
+        width: 3vh;
+        height: 3vh;
+    }
+
+    #searchBar {
+        margin-left: 3.5vw;
     }
 
     #sideMenu {
@@ -247,5 +298,13 @@ h2 .accordion-button {
 
     .btn-group-vertical {
         width: 30em;
+    }
+
+    .zip-county-setup {
+        width: 80vw;
+    }
+
+    #dist {
+        width: 60vw;
     }
 }

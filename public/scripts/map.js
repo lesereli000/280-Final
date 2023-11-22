@@ -11,11 +11,8 @@ let userLat = 0;
 let userLng = 0;
 
 if ("geolocation" in navigator) {
-    // Prompt user for permission to access their location
     navigator.geolocation.getCurrentPosition(
-        // Success callback function
         async (position) => {
-            // Get the user's latitude and longitude coordinates
             userLat = position.coords.latitude;
             userLng = position.coords.longitude;
 
@@ -26,14 +23,11 @@ if ("geolocation" in navigator) {
             updateZipField(zip);
             updateCountyField(county);
         },
-        // Error callback function
         (error) => {
-            // Handle errors, e.g. user denied location sharing permissions
             console.error("Error getting user location:", error.message);
         }
     );
 } else {
-    // Geolocation is not supported by the browser
     console.error("Geolocation is not supported by this browser.");
 }
 
@@ -54,11 +48,8 @@ function cleanArray(array) {
     }
     return newArr;
 }
-// TODO: Make the commented out code work with new accordions for taxomity
-
 
 for (const subcat of subcats) {
-    // TODO: Make this support clicking larger section select all (ie. Food)
     subcat.onclick = function () {
         this.classList.toggle("active");
         if (this.classList.contains("active")) {
@@ -75,7 +66,7 @@ const headers = document.querySelectorAll(".taxon-header");
 
 for (const header of headers) {
     header.onclick = function () {
-        activeFilters = [];
+        // activeFilters = [];
         console.log(activeFilters);
         for (const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)) {
             subcat.classList.remove("active");
@@ -300,7 +291,6 @@ async function initMap() {
     const markers = findLocations(map);
 }
 
-// default to Marion County (Indianapolis)
 if (zip || county) {
     initMap();
 } else {
@@ -308,15 +298,12 @@ if (zip || county) {
     initMap();
 }
 
-// add button listeners to re-init map
 const zipSearch = document.getElementById("findZip");
 zipSearch.addEventListener("click", () => {
     zip = zipBox.value;
     county = "";
     countyBox.value = "";
-    // only update map if we know what county to look at
     if (zip) {
-        // geocode and re init map
         let coords = geocode(zip, county);
         initMap(coords);
 
@@ -328,9 +315,7 @@ cntySearch.addEventListener("click", () => {
     county = countyBox.value;
     zip = "";
     zipBox.value = "";
-    // only update map if we know what county to look at
     if (county) {
-        // geocode and re init map
         let coords = geocode(zip, county);
         initMap(coords);
     }

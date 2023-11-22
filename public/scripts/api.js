@@ -132,12 +132,8 @@ app.get("/", async (request, response) => {
                     let valid = false;
 
                     filters.forEach((filter) => {
-                        valid = valid || obj["taxonomy_name"] == filter;
                         valid = valid || obj["taxonomy_category"] == filter;
                         valid = valid || obj["nameLevel2"] == filter;
-                        valid = valid || obj["nameLevel3"] == filter;
-                        valid = valid || obj["nameLevel4"] == filter;
-                        valid = valid || obj["nameLevel5"] == filter;
                     });
 
                     return valid;
