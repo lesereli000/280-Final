@@ -1,6 +1,4 @@
-// TODO: Remove auto search
-// TODO: Auto fill search params from URL
-// TODO: Remove google map markers already there
+// TODO: Make URL updating work
 
 const slider = document.getElementById("dist");
 const output = document.getElementById("distLabel");
@@ -66,7 +64,6 @@ const headers = document.querySelectorAll(".taxon-header");
 
 for (const header of headers) {
     header.onclick = function () {
-        // activeFilters = [];
         console.log(activeFilters);
         for (const subcat of document.querySelectorAll(`${this.dataset.bsTarget} button`)) {
             subcat.classList.remove("active");
@@ -153,8 +150,7 @@ async function findLocations(map) {
         }
         console.log(queryString);
     }
-    // TODO: Fix line below
-    // window.location.href = `mapView.html?${queryString}`;
+
     document.getElementById("loader").classList.add("loader");
     document.getElementById("loaderParent").classList.add("loader-parent");
     fetch(`http://localhost:3000/?${queryString}`)
@@ -202,41 +198,43 @@ async function findLocations(map) {
 }
 
 async function geocode(zip, county) {
-    // TODO: Map shows all responses for multi-select (averages for cooords?)
+    let foundCoords = { lat: 0, lng: 0 };
     if (zip) {
         zip = zip.split(", ");
-        zip = zip[0];
-        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "ZERO_RESULTS") {
-                    return coords = { lat: 0, lng: 0 }
-                }
-                console.log(zip);
-                coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
-            });
-        return coords;
+        for (let i = 0; i < zip.length; i++) {
+            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip[i]}&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "ZERO_RESULTS") {
+                        return foundCoords = { lat: 0, lng: 0 }
+                    }
+                    foundCoords = { lat: data.results[0].geometry.location.lat + foundCoords.lat, lng: data.results[0].geometry.location.lng + foundCoords.lng };
+                });
+        }
+        foundCoords = { lat: foundCoords.lat / zip.length, lng: foundCoords.lng / zip.length };
+        return foundCoords;
     } else if (county) {
         county = county.split(", ");
-        county = county[0];
-        await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county}%20County%20IN&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "ZERO_RESULTS") {
-                    return coords = { lat: 0, lng: 0 }
-                }
-                coords = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
-            });
-        return coords;
+        for (let i = 0; i < county.length; i++) {
+            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${county[i]}%20County%20IN&key=AIzaSyD190DfFJZ9FUhKxQ7OPutlmTAcFKjIgV0`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "ZERO_RESULTS") {
+                        return foundCoords = { lat: 0, lng: 0 }
+                    }
+                    foundCoords = { lat: data.results[0].geometry.location.lat + foundCoords.lat, lng: data.results[0].geometry.location.lng + foundCoords.lng };
+                });
+        }
+        foundCoords = { lat: foundCoords.lat / county.length, lng: foundCoords.lng / county.length };
+        return foundCoords;
     } else {
         if (userLat != 0) {
-            coords = { lat: userLat, lng: userLng };
-            console.log(coords);
+            foundCoords = { lat: userLat, lng: userLng };
         } else {
             county = "Marion"
-            coords = { lat: 39.7684, lng: -86.1581 };
+            foundCoords = { lat: 39.7684, lng: -86.1581 };
         }
-        return coords;
+        return foundCoords;
     }
 }
 
@@ -253,40 +251,18 @@ async function initMap() {
         updateSearchNearField(county);
     }
 
-    var myStyles = [
-        {
-            "elementType": "labels",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "administrative.land_parcel",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "administrative.neighborhood",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        }
-    ];
+    let setZoom = 11;
+
+    if (zip.includes(",") || county.includes(",")) {
+        setZoom = 7;
+    }
 
     map = new Map(document.getElementById("map"), {
-        mapId: '115c56c4cc9092d4',
-        zoom: 11,
+        mapId: '9d96e41743550e7f',
+        zoom: setZoom,
         center: position,
-        disableDefaultUI: true,
+        disableDefaultUI: true
     });
-
 
     const markers = findLocations(map);
 }
